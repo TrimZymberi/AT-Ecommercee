@@ -5,7 +5,7 @@ import Navbar from '../../Components/Navbar'
 export default function GuestLayout() {
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <Outlet />
         </div>
     )
