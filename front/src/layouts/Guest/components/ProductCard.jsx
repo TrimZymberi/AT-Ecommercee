@@ -15,7 +15,7 @@ export default function ProductCard(item) {
                     </h1>
                 </div>
                 <div class="grid grid-cols-2 hover:bg-opacity-90 hover:border-opacity-90 bg-white">
-                    <button class="text-sky-100 bg-sky-900 px-4 hover:scale-105 hover:rounded-sm hover:bg-sky-800 transition-all font-thin">Click for details</button>
+                    <button class="text-sky-100 bg-sky-900 px-4 hover:scale-105 hover:rounded-sm hover:bg-sky-800 transition-all font-thin">Add to Cart</button>
                     <price class="flex justify-end font-semibold tracking-tighter text-sky-900 text-xl border-sky-900 border-4 p-1 rounded-b-sm">{item.price}EUR</price>
                 </div>
             </div>
