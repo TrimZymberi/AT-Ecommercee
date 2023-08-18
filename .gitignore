@@ -3,3 +3,6 @@
 .js
 *.js
 *.js
+*.md
+*.cmd
+node_modules/.bin/loose-envify
