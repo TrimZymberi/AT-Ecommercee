@@ -1,7 +1,10 @@
 import React from 'react'
+import CustomerNav from './CustomerNav'
 
 export default function CustomerHome() {
   return (
-    <div>CustomerHome</div>
+    <div>
+      <CustomerNav/>
+    </div>
   )
 }
