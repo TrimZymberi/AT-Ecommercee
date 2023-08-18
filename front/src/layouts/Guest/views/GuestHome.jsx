@@ -5,9 +5,7 @@ import Categories from '../components/Categories'
 export default function GuestHome() {
   return (
     <div>
-      <div className="fixed bg-blur-xl bg-white bg-opacity-90 right-0 left-0 flex justify-between p-6 z-10">
-          <Link>AT Electronics</Link>
-        </div>
+
         <div className="shadow-sm bg-sky-100 grid items-end sm:items-center">
           <img src="//i.dell.com/sites/csimages/App-Merchandizing_Images/all/homepage-hero-banner-mobile-non-commerce-2800x839.jpg" alt="" />
             <div className="absolute">
