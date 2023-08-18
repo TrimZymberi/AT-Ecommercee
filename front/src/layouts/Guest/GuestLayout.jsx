@@ -1,11 +1,11 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Navbar from '../../Components/Navbar'
+import GuestNav from './views/GuestNav'
 
 export default function GuestLayout() {
     return (
         <div>
-            <Navbar />
+            <GuestNav />
             <Outlet />
         </div>
     )
