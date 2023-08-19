@@ -1,10 +1,13 @@
 import React from 'react'
 import CategoryTab from './CategoryTab'
-
+import gifImage from '../../Unix/images/ATLogo.gif'
 export default function Categories() {
     return (
-        <div>
+        <div class="border-b-8 border-sky-200 bg-sky-50">
             <CategoryTab />
+            {/* <div className='flex items-center justify-center'>
+                <img src={gifImage} alt="Animated GIF" />
+            </div> */}
         </div>
     )
 }

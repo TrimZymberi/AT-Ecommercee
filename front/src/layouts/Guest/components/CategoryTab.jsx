@@ -25,12 +25,12 @@ export default function CategoryTab() {
     };
 
     return (
-        <div className=''>
+        <div className='bg-sky-50'>
             <div className="grid grid-cols-6 items-center">
                 {CategoryData.map(category => (
                     <div key={category.title}
                         onClick={() => handleTabClick(category.title)}
-                        className={`grid items-center justify-center bg-sky-50 hover:ring-4 hover:cursor-pointer transition-all hover:shadow-md hover:scale-105 ring-sky-200 ${selectedTab === category.title ? 'ring-4 scale-105 ring-sky-200' : 'border-transparent'
+                        className={`grid items-center justify-center bg-sky-50 h-14 hover:ring-4 hover:cursor-pointer transition-all hover:shadow-md hover:scale-105 ring-sky-200 ${selectedTab === category.title ? 'ring-4 scale-105 ring-sky-200' : 'border-transparent'
                             }`}>
                         <div class="flex justify-center">
                             <div dangerouslySetInnerHTML={{ __html: category.svg }} className='w-8 text-sky-950' />
@@ -48,8 +48,8 @@ export default function CategoryTab() {
                     </div>
                 ))}
             </div>
-            <div className="mt-5">
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 bg-white">
+            <div className="mt-0">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                     {renderProducts(selectedTab)}
                 </div>
             </div>
