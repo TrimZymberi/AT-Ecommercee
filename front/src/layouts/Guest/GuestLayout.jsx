@@ -5,11 +5,12 @@ import Footer from './components/Footer'
 
 export default function GuestLayout() {
     return (
-        <div>
+    <div>
             <GuestNav />
             <Outlet />
             <Footer />
-        </div>
+
+    </div>
 
 )
 }

@@ -10,14 +10,15 @@ export default function GuestNav() {
         setIsDrawerOpen(!isDrawerOpen);
     }
 
-    const navigate = useNavigate(); 
+    const LogInNavigate = useNavigate();
+    const HomeNavigate = useNavigate(); 
 
     return (
-        <nav className="bg-sky-200 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+        <nav className="bg-sky-200  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
                 <a href="" className="flex items-center">
                     <div className='flex justify-center items-center p-4'>
-                        <img src={loader} alt="" className='w-14 h-14 scale-150' />
+                        <img onClick={()=>HomeNavigate("/home")} src={loader} alt="" className='w-14 h-14 scale-150' />
                     </div>
                 </a>
                 <form className="flex items-center">
@@ -41,7 +42,7 @@ export default function GuestNav() {
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <div className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <div>
-                            <button onClick={()=>navigate("/login")} className="p-2 ml-2 text-sm font-medium text-white ">
+                            <button onClick={()=>LogInNavigate("/login")} className="p-2 ml-2 text-sm font-medium text-white ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                                 </svg>
