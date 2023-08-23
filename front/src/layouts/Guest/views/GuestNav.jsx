@@ -14,7 +14,7 @@ export default function GuestNav() {
     const HomeNavigate = useNavigate(); 
 
     return (
-        <nav className="bg-sky-200  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+        <nav className="bg-sky-100  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
                 <a href="" className="flex items-center">
                     <div className='flex justify-center items-center p-4'>

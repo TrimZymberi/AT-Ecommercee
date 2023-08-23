@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryData from '../data/CategoryData';
 import ProductCard from './ProductCard';
+import ProductCard_skeleton from './core/ProductCard_skeleton';
 
 export default function CategoryTab() {
     const [selectedTab, setSelectedTab] = useState(CategoryData[0]?.title);
+    const [isLoading, setIsLoading] = useState(true);
 
     const handleTabClick = (tabTitle) => {
         setSelectedTab(tabTitle);
@@ -24,9 +26,19 @@ export default function CategoryTab() {
         return null;
     };
 
+    useEffect(() => {
+        const loadingTimeout = setTimeout(() => {
+            setIsLoading(false);
+        }, 6000);
+
+        return () => {
+            clearTimeout(loadingTimeout);
+        };
+    }, []);
+
     return (
         <div className='bg-sky-50'>
-            <div className="grid grid-cols-6 items-center">
+            <div className="grid  sm:grid-cols-3 xl:grid-cols-6 items-center">
                 {CategoryData.map(category => (
                     <div key={category.title}
                         onClick={() => handleTabClick(category.title)}
@@ -50,7 +62,11 @@ export default function CategoryTab() {
             </div>
             <div className="mt-0">
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                    {renderProducts(selectedTab)}
+                    {isLoading ? (
+                        <ProductCard_skeleton /> 
+                    ) : (
+                        renderProducts(selectedTab)
+                    )}
                 </div>
             </div>
         </div>

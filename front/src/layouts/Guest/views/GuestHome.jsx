@@ -15,7 +15,7 @@ export default function GuestHome() {
           <p className="text-sky-50 p-1 text-xs sm:text-xl">Dive into our tech treasure trove and discover gadgets that'll blow your mind. From coding champs to gadget gurus, we've got something epic for everyone. Ready to level up your tech game? Let the geeking out begin!</p>
         </div>
       </div>
-      <div className='grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 p-8 gap-4 bg-gray-900 border-b-4  border-sky-200'>
+      <div className='grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 border-b-4 border-sky-200 bg-gray-900'>
         <div className='flex justify-center items-center gap-2 p-2 border-2 border-sky-200 bg-blur-xl bg-sky-200 bg-opacity-70'>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-14 h-14 text-sky-200">
             <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
@@ -49,7 +49,6 @@ export default function GuestHome() {
         <div></div>
       </div>
       <Categories />
-      
       <Sponsors />
     </div>
   )
