@@ -9,7 +9,7 @@ export default function ProductCard(item) {
     // };
 
     return (
-            <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 p-4 gap-4 bg-sky-50">
+            <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 p-4 gap-4">
                 {/* {showDetails && (
                     <div className="absolute bg-sky-200 text-center w-32 transition-all">
                         <p className="p-2 font-thin text-sky-950">Detailed information about the product. <Link className="underline font-normal">Here</Link></p>
@@ -35,11 +35,11 @@ export default function ProductCard(item) {
                             {item.name}
                         </Link>
                     </div>
-                    <div className="grid grid-cols-2 hover:bg-opacity-90 hover:border-opacity-90">
+                    <div className="grid grid-cols-2 hover:bg-opacity-90 hover:border-opacity-90 bg-sky-900">
                         <button className="text-sky-100 bg-sky-900 px-4 hover:scale-105 hover:rounded-sm hover:bg-sky-800 transition-all font-medium">
                             Add to Cart
                         </button>
-                        <price className="flex justify-end tracking-tight text-sky-900 text-xl border-sky-900 border-4 p-1 rounded-b-sm">
+                        <price className="flex justify-end tracking-tight bg-white text-sky-900 text-xl border-sky-900 border-4 p-1">
                             {item.price}EUR
                         </price>
                     </div>
