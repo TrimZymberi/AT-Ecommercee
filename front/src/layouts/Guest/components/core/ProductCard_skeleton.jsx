@@ -1,11 +1,14 @@
 import React from 'react'
-import logo from '../../../Unix/images/WEBDEV.gif'
+import loader from '../../../Unix/images/ATcolor1.gif'
+
 export default function ProductCard_skeleton() {
     return (
-        <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-4'>
-                <div className="h-96 w-96 grid items-center">
-                    <img src={logo} alt="" className='h-96 w-96 flex items-center justify-center' />
-                </div>
+        <div className='flex justify-center items-center p-4'>
+            <div className="text-center">
+            <div className="h-40"></div>
+                <img src={loader} alt="" className='h-96 flex items-center justify-center' />
+            <div className="h-40"></div>
+            </div>
         </div>
     )
 }
