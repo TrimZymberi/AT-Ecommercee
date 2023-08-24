@@ -4,24 +4,34 @@ export default function LoginPage() {
   return (
     
     
-    <form>
-    <div class="mb-6">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-        <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required/>
+    <div className='flex justify-center items-center h-screen  bg-sky-50'>
+      <div className='w-96 scale-x-110 scale-y-110 p-6 shadow-lg bg-white rounded-md'>
+          <h1 className='text-3xl block text-center font-semibold'><i class="fa-solid fa-user"></i> Login</h1>
+          <hr className='mt-3'/>
+          <div className='mt-3'>
+            <label htmlFor="username" className='block text-base mb-2'>Username</label>
+            <input type="text" id='Username' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Username'/>
+          </div>
+          <div className='mt-3'>
+            <label htmlFor="password" className='block text-base mb-2'>Password</label>
+            <input type="password" id='Password' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Password'/>
+          </div>
+          <div className='mt-3'>
+            <a href="#" className='text-sky-800 font-semibold'>Forgot pawssord?</a>
+          </div>
+          <div className='mt-5'>
+              <button type='submit' className='border-2 border-sky-800 bg-sky-800 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-indigo-700 font-semibold'>Login</button>
+          </div>
+          <div className='mt-3  flex justify-between items-center'>
+            <div className='ml-8'>
+            <h5 className='font-thin text-black'>Don't have an account?</h5>
+            </div>
+            <div className='mr-11'>
+            <a href="#" className='text-sky-800 font-semibold'>Register Now</a>
+            </div>
+          </div>
+      </div>
     </div>
-    <div class="mb-6">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
-    </div>
-    <div class="flex items-start mb-6">
-        <div class="flex items-center h-5">
-        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required/>
-        </div>
-        <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-    </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-    </form>
-   
 
   )
 }
