@@ -20,7 +20,7 @@ export default function LoginPage() {
             <a href="#" className='text-sky-800 font-semibold'>Forgot pawssord?</a>
           </div>
           <div className='mt-5'>
-              <button type='submit' className='border-2 border-sky-800 bg-sky-800 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-indigo-700 font-semibold'>Login</button>
+              <button type='submit' className='border-2 border-sky-800 bg-sky-800 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-sky-700 font-semibold'>Login</button>
           </div>
           <div className='mt-3  flex justify-between items-center'>
             <div className='ml-8'>
