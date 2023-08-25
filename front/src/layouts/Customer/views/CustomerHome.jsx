@@ -4,7 +4,6 @@ import CustomerNav from './CustomerNav'
 export default function CustomerHome() {
   return (
     <div>
-      <CustomerNav/>
     </div>
   )
 }
