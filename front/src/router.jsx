@@ -8,6 +8,7 @@ import CustomerHome from "./layouts/Customer/views/CustomerHome";
 import Dashboard from "./layouts/Manager/views/Dashboard";
 import EmployeeHome from "./layouts/Employee/views/EmployeeHome";
 import LoginPage from "./layouts/Guest/views/LoginPage";
+import RegisterPage from "./layouts/Guest/views/RegisterPage";
 
 const router = createBrowserRouter ([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter ([
             {
                 path: 'login',
                 element: <LoginPage />,
+            },
+            {
+                path: 'register',
+                element: <RegisterPage />,
             }
         ]
     },
