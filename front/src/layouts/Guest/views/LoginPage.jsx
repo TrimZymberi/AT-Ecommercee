@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../../../api/axios';
 import Swal from 'sweetalert2'
+import { useStateContext } from '../../../contexts/ContextProvider';
 
 export default function LoginPage() {
   const { setCurrentUser, setUserToken } = useStateContext();
@@ -13,7 +14,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const RegisterNow = useNavigate();
 
-  const onSubmit = (ev) => {
+  const loginValidation = (ev) => {
     ev.preventDefault();
     setError({ __html: "" });
     setSubmitting(true);
@@ -85,8 +86,8 @@ export default function LoginPage() {
           <h1 className='text-3xl block text-center font-semibold'><i class="fa-solid fa-user"></i> Login</h1>
           <hr className='mt-3' />
           <div className='mt-3'>
-            <label htmlFor="username" value={username} className='block text-lg mb-2'>Username</label>
-            <input type="text" name='Username' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Username' />
+            <label htmlFor="email" value={email} className='block text-lg mb-2'>Email</label>
+            <input type="email" name='email' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Email' />
           </div>
           <div className='mt-3'>
             <label htmlFor="password" value={password} className='block text-lg mb-2'>Password</label>
@@ -118,6 +119,7 @@ export default function LoginPage() {
   return (
 
     <div className='flex justify-center items-center h-screen  bg-sky-50'>
+          <form onSubmit={loginValidation}>
       <div className='w-96 scale-x-110 scale-y-110 p-6 shadow-lg bg-white rounded-md'>
         <h1 className='text-3xl block text-center font-semibold'><i class="fa-solid fa-user"></i> Login</h1>
         <hr className='mt-3' />
@@ -152,6 +154,7 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
+      </form>
     </div>
 
   )

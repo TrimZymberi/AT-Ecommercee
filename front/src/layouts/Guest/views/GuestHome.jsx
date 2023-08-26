@@ -22,7 +22,9 @@ export default function GuestHome() {
           </svg>
           <div>
             <h1 className='text-xl font-semibold text-sky-950'>Assured Quality</h1>
-            <p className='text-lg text-sky-900'>The best companies of technology in the market, you find them here!</p>
+            <p className='text-lg text-sky-900'>
+            Explore our collection of technology products, chosen from established industry leaders.
+            </p>
           </div>
         </div>
         <div className='flex justify-center items-center gap-2 p-2 border-2 border-sky-200 bg-blur-xl bg-sky-200 bg-opacity-70'>
@@ -33,7 +35,9 @@ export default function GuestHome() {
           </svg>
           <div>
             <h1 className='text-xl font-semibold text-sky-950'>Transport</h1>
-            <p className='text-lg text-sky-900'>Transport free anywhere in US for any of the products. Fast transport and safe!</p>
+            <p className='text-lg text-sky-900'>
+            Experience the convenience of free. Your orders will reach you swiftly and securely.
+            </p>
           </div>
         </div>
         <div className='flex justify-center items-center gap-2 p-2 border-2 border-sky-200 bg-blur-xl bg-sky-200 bg-opacity-70'>
@@ -42,8 +46,10 @@ export default function GuestHome() {
             <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
           </svg>
           <div>
-            <h1 className='text-xl font-semibold text-sky-950'>1-5 years guarantee</h1>
-            <p className='text-lg text-sky-900'>Transport free anywhere in US for any of the products. Fast transport and safe!</p>
+            <h1 className='text-xl font-semibold text-sky-950'>Guarantee</h1>
+            <p className='text-lg text-sky-900'>
+              Enjoy peace of mind as your purchase is covered, ensuring lasting quality and satisfaction.
+              </p>
           </div>
         </div>
         <div></div>
