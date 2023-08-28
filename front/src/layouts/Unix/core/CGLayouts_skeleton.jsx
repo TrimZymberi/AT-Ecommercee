@@ -1,6 +1,7 @@
 import React from 'react'
 import loader from '../images/ATcolor.gif'
 import logo from '../images/5.png'
+import Sponsors from '../../Guest/views/Sponsors'
 
 export default function Nav_skeleton() {
     return (
@@ -73,6 +74,7 @@ export default function Nav_skeleton() {
                     </div>
                 </div>
             </div>
+            <Sponsors />
         </div>
     )
 }

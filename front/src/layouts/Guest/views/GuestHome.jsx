@@ -2,7 +2,6 @@ import React from 'react'
 import Categories from '../components/Categories'
 import homepage from '../../Unix/images/homepage.webp'
 import Sponsors from './Sponsors'
-import loader from '../../Unix/images/WEBDEV.gif'
 
 export default function GuestHome() {
   return (

@@ -1,26 +1,39 @@
+
+
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import Drawer from '../../Customer/views/Drawer';
+import { Link, useNavigate } from 'react-router-dom';
 import loader from '../../Unix/images/5.png'
 
 export default function GuestNav() {
-    const [options, setOptions] = useState(false);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [isFirstSvg, setIsFirstSvg] = useState(true);
-
-    const toggleOpt = () => {
-        setIsFirstSvg(prevState => !prevState);
-    };
-
-    const toggleDrawer = () => {
-        setIsDrawerOpen(!isDrawerOpen);
-    }
+    const [showAlert, setShowAlert] = useState(false);
 
     const LogInNavigate = useNavigate();
     const HomeNavigate = useNavigate();
 
     return (
         <nav className="bg-white backdrop-blur-lg bg-opacity-80 fixed w-full z-30 top-0 left-0 h-24 shadow-sm ">
+            {showAlert && (
+                <div id="alert-border-2" className="flex fixed z-40 justify-top transition-transform bottom-100 top-1 left-100 right-1 shadow-md w-max p-4 mb-4 backdrop-blur-md bg-opacity-70 text-sky-800 border-b-4 border-sky-400 bg-sky-50" role="alert">
+                    <svg className="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path>
+                    </svg>
+                    <div className="ml-3 text-sm font-medium">
+                        You cannot order as a guest you must <Link className='underline' to="login">Login</Link> to order and check cart.
+                    </div>
+                    <button
+                        type="button"
+                        className="ml-1 -mx-1.5 -my-1.5 bg-sky-50 text-sky-500 rounded-lg focus:ring-2 focus:ring-sky-400 p-1.5 hover:bg-sky-200 inline-flex h-8 w-8"
+                        data-dismiss-target="#alert-border-2"
+                        aria-label="Close"
+                        onClick={() => setShowAlert(false)}
+                    >
+                        <span className="sr-only">Dismiss</span>
+                        <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            )}
             <div className="flex justify-between p-2 items-center">
                 <div className="flex items-center justify-center">
                     <a href="" className="flex items-center">
@@ -61,16 +74,9 @@ export default function GuestNav() {
                                 </button>
                             </div>
                             <div>
-                                <button onClick={toggleDrawer} className="p-2 ml-0 text-sm font-medium text-sky-950 hover:text-sky-500" >
+                                <button onClick={() => setShowAlert(true)} className="p-2 ml-0 text-sm font-medium text-sky-950 hover:text-sky-500" >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div>
-                                <button onClick={toggleOpt} className="p-2 ml-0 text-sm font-medium text-sky-950 hover:text-sky-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" strokeWidth={1.5} className="w-6 h-6">
-                                        <path fillRule="evenodd" d={isFirstSvg ? "M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" : "M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm7 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"} clipRule="evenodd" />
                                     </svg>
                                 </button>
                             </div>
@@ -79,8 +85,8 @@ export default function GuestNav() {
                 </div>
 
             </div>
-            {isDrawerOpen && <Drawer />}
         </nav>
     )
 }
+
 

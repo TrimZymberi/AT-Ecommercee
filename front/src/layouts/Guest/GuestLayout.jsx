@@ -4,7 +4,7 @@ import GuestNav from './views/GuestNav'
 import Footer from './components/Footer'
 import axiosClient from '../../api/axios';
 import { useStateContext } from '../../contexts/ContextProvider';
-import Nav_skeleton from '../Unix/core/CGLayouts_skeleton';
+import GuestSkeleton from '../Unix/core/CGLayouts_skeleton';
 
 export default function GuestLayout() {
     const { setCurrentUser, userToken } = useStateContext();
@@ -33,7 +33,7 @@ export default function GuestLayout() {
     }, [navigate, setCurrentUser, userToken]);
 
     if (validatingUser) {
-        return <Nav_skeleton />;
+        return <GuestSkeleton />;
     }
     
     return (
