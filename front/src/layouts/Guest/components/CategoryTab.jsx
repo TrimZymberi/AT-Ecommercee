@@ -42,7 +42,7 @@ export default function CategoryTab() {
                 {CategoryData.map(category => (
                     <div key={category.title}
                         onClick={() => handleTabClick(category.title)}
-                        className={`grid items-center justify-center bg-sky-50 p-2 h-20 w-full hover:ring-4 hover:cursor-pointer hover:z-20 transition-all ring-sky-200 active:ring-sky-300 ${selectedTab === category.title ? 'ring-4 z-10 ring-sky-200' : 'border-transparent'
+                        className={`grid text-sky-950 items-center justify-center bg-sky-50 p-2 h-20 w-full hover:ring-4 hover:cursor-pointer hover:z-20 transition-all ring-sky-200 active:ring-sky-300 ring-offset-0 ${selectedTab === category.title ? 'ring-4 z-10 ring-sky-200 ring-offset-0' : 'border-transparent'
                             }`}>
                         <div class="flex justify-center ">
                             <div dangerouslySetInnerHTML={{ __html: category.svg }} className='w-8 text-sky-950' />

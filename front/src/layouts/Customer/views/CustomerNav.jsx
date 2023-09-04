@@ -18,7 +18,7 @@ export default function CustomerNav() {
     const HomeNavigate = useNavigate();
 
     return (
-        <nav className="bg-white backdrop-blur-lg bg-opacity-80 fixed w-full z-30 top-0 left-0 h-24 shadow-sm ">
+        <nav className="bg-white backdrop-blur-lg bg-opacity-80 fixed w-full z-50 top-0 left-0 h-24 shadow-sm ">
             <div className="flex justify-between p-2 items-center">
                 <div className="flex items-center justify-center">
                     <a href="" className="flex items-center">
@@ -37,7 +37,7 @@ export default function CustomerNav() {
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
                                 </svg>
                             </div>
-                            <input type="text" id="simple-search" className="bg-white outline-none shadow-md text-sky-900 text-md focus:ring-sky-300 p-3.5 pl-10 h-full" placeholder="What are you looking for" required />
+                            <input type="text" id="simple-search" className="border-none bg-white outline-none shadow-md text-sky-900 text-md focus:ring-sky-300 p-3.5 pl-10 h-full" placeholder="What are you looking for" required />
                         </div>
                         <button type="submit" className="p-4 h-full text-sm font-medium text-white hover:bg-sky-400 shadow-md bg-sky-500 focus:outline-none">
                             <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

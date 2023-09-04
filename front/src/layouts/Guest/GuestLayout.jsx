@@ -4,12 +4,16 @@ import GuestNav from './views/GuestNav'
 import Footer from './components/Footer'
 import axiosClient from '../../api/axios';
 import { useStateContext } from '../../contexts/ContextProvider';
-import GuestSkeleton from '../Unix/core/CGLayouts_skeleton';
+import GuestSkeleton from '../Unix/core/GUELayouts_skeleton';
 
 export default function GuestLayout() {
     const { setCurrentUser, userToken } = useStateContext();
     const [validatingUser, setValidatingUser] = useState(true);
     const navigate = useNavigate();
+    const containerStyles = {
+        background: 'rgb(240,249,255)',
+        backgroundImage: 'linear-gradient(90deg, rgba(240,249,255,1) 0%, rgba(198,232,255,1) 35%, rgba(70,181,255,1) 100%)',
+      };
 
     useEffect(() => {
         axiosClient
@@ -37,10 +41,9 @@ export default function GuestLayout() {
     }
     
     return (
-        <div>
+        <div style={containerStyles}>
             <GuestNav />
-            <div className="h-24 bg-sky-200">
-            </div>
+            <div className="h-24"></div>
             <Outlet />
             <Footer />
         </div>

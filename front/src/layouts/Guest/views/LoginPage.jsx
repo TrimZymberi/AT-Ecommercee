@@ -58,7 +58,7 @@ export default function LoginPage() {
         if (error.response && error.response.data && error.response.data.errors) {
           const errors = error.response.data.errors;
           setError({
-            name: errors.name ? errors.name.join("<br>") : "",
+            email: errors.email ? errors.email.join("<br>") : "",
             email: errors.email ? errors.email.join("<br>") : "",
             emailex: errors.email ? errors.email[0] : "",
             password: errors.password ? errors.password.join("<br>") : "",
@@ -86,12 +86,12 @@ export default function LoginPage() {
           <h1 className='text-3xl block text-center font-semibold'><i class="fa-solid fa-user"></i> Login</h1>
           <hr className='mt-3' />
           <div className='mt-3'>
-            <label htmlFor="email" value={email} className='block text-lg mb-2'>Email</label>
-            <input type="email" name='email' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Email' />
+            <label htmlFor="email" className='block text-lg mb-2'>Email</label>
+            <input type="email" value={email} name='email' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Email' />
           </div>
           <div className='mt-3'>
-            <label htmlFor="password" value={password} className='block text-lg mb-2'>Password</label>
-            <input type="password" name='Password' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Password' />
+            <label htmlFor="password" className='block text-lg mb-2'>Password</label>
+            <input type="password" value={password} name='Password' className='border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600' placeholder='Enter Password' />
           </div>
           <div className='mt-3'>
             <a href="#" className='text-sky-800 font-semibold'>Forgot pawssord?</a>
@@ -142,6 +142,31 @@ export default function LoginPage() {
         <div className='mt-3'>
           <a href="#" className='text-sky-800 font-semibold'>Forgot pawssord?</a>
         </div>
+        {error.password && (
+            <div class="flex p-2 mt-4 text-sm text-sky-900 rounded-lg bg-sky-50" role="alert">
+              <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+                <span class="font-medium">Ensure that these requirements are met:</span>
+                <ul class="mt-1.5 ml-4 list-disc list-inside">
+                  {error.email && <li dangerouslySetInnerHTML={{ __html: error.email }}></li>}
+                  {error.password && <li dangerouslySetInnerHTML={{ __html: error.password }}></li>}
+                </ul>
+              </div>
+            </div>
+          )}
+          {error.other && (
+            <div class="flex p-2 mt-4 text-sm text-sky-600 rounded-lg bg-sky-50 " role="alert">
+              <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+                <span class="font-medium">Ensure that these requirements are met:</span>
+                <ul class="mt-1.5 ml-4 list-disc list-inside">
+                  {error.other && <li dangerouslySetInnerHTML={{ __html: error.other }}></li>}
+                </ul>
+              </div>
+            </div>
+          )}
         <div className='mt-5'>
           <button type='submit' className='border-2 border-sky-800 bg-sky-800 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-sky-700 font-semibold'>Login</button>
         </div>
