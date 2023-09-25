@@ -1,3 +1,0 @@
-*.md
-*.cmd
-node_modules/.bin/loose-envify

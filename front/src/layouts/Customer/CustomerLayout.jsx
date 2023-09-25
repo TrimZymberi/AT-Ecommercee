@@ -1,55 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import { Outlet, useNavigate} from 'react-router-dom'
-import Footer from '../Guest/components/Footer';
-import CustomerNav from './views/CustomerNav';
-import { useStateContext } from '../../contexts/ContextProvider';
-import axiosClient from '../../api/axios';
-import CustomerSkeleton from '../Unix/core/CUSLayout_skeleton';
+import React, { useState } from 'react'
+import Navbar from '../Universal/views/Navbar'
+import { Outlet } from 'react-router-dom'
+import Footer from '../Universal/views/Footer'
+import Cart from './components/Cart';
 
 export default function CustomerLayout() {
-    const {setCurrentUser, userToken} = useStateContext();
-    const [validatingUser, setValidatingUser] = useState(true);
-    const navigate = useNavigate();
-    const containerStyles = {
-      background: 'rgb(240,249,255)',
-      backgroundImage: 'linear-gradient(90deg, rgba(240,249,255,1) 0%, rgba(198,232,255,1) 35%, rgba(70,181,255,1) 100%)',
-    };
+    const [showModal, setshowModal] = useState(false);
 
-    useEffect(() => {
-      if (!userToken) {
-        navigate('../../');
-        return;
-      }
-  
-      axiosClient
-        .get('/me')
-        .then(({ data }) => {
-          setCurrentUser(data);
-          if (data.role === 'manager') {
-            navigate('../../management')
-          } else if (data.role === 'driver') {
-            navigate('../../workdrive')
-          } else if (data.role === 'employee') {
-            navigate('../../workspace')
-          }
-          setValidatingUser(false);
-        })
-        .catch(() => {
-          setValidatingUser(false);
-        });
-    }, [navigate, setCurrentUser, userToken]);
-  
-    if (validatingUser) {
-      return <CustomerSkeleton />;
-    }
-  
-    
+    const toggle = () => {
+        setshowModal(!showModal);
+    };
     return (
-        <div style={containerStyles}>
-            <CustomerNav />
-            <div className="h-24"></div>
-            <Outlet />
-            <Footer />
+        <div className="relative">
+            <div
+                className="absolute inset-0 z-0 overflow-hidden blur-10xl"
+                aria-hidden="true"
+                style={{
+                    background: 'linear-gradient(to bottom right, #d66931, #dc3545)',
+                    clipPath:
+                        'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                }}
+            />
+            <div className="relative z-10">
+                <Navbar />
+                <Outlet />
+                <Cart showModal={showModal} toggle={toggle} />
+                <Footer />
+            </div>
         </div>
     )
 }

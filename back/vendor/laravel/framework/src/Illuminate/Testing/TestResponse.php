@@ -193,7 +193,11 @@ class TestResponse implements ArrayAccess
             $this->statusMessageWithDetails('201, 301, 302, 303, 307, 308', $this->getStatusCode()),
         );
 
-        $this->assertLocation($uri);
+        $request = Request::create($this->headers->get('Location'));
+
+        PHPUnit::assertEquals(
+            app('url')->to($uri), $request->fullUrl()
+        );
 
         return $this;
     }
@@ -890,7 +894,7 @@ class TestResponse implements ArrayAccess
     /**
      * Assert that the given key is a JSON array.
      *
-     * @param  string|null  $key
+     * @param $key
      * @return $this
      */
     public function assertJsonIsArray($key = null)
@@ -911,7 +915,7 @@ class TestResponse implements ArrayAccess
     /**
      * Assert that the given key is a JSON object.
      *
-     * @param  string|null  $key
+     * @param $key
      * @return $this
      */
     public function assertJsonIsObject($key = null)
@@ -1652,6 +1656,8 @@ class TestResponse implements ArrayAccess
     protected function appendMessageToException($message, $exception)
     {
         $property = new ReflectionProperty($exception, 'message');
+
+        $property->setAccessible(true);
 
         $property->setValue(
             $exception,

@@ -1035,7 +1035,7 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
      *
      * @param  TValue|(callable(TValue,TKey): bool)  $value
      * @param  bool  $strict
-     * @return TKey|false
+     * @return TKey|bool
      */
     public function search($value, $strict = false)
     {
@@ -1726,6 +1726,6 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
      */
     protected function now()
     {
-        return Carbon::now()->timestamp;
+        return time();
     }
 }

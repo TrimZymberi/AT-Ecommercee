@@ -1,51 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import GuestNav from './views/GuestNav'
-import Footer from './components/Footer'
-import axiosClient from '../../api/axios';
-import { useStateContext } from '../../contexts/ContextProvider';
-import GuestSkeleton from '../Unix/core/GUELayouts_skeleton';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Navbar from '../Universal/views/Navbar';
+import Footer from '../Universal/views/Footer';
 
 export default function GuestLayout() {
-    const { setCurrentUser, userToken } = useStateContext();
-    const [validatingUser, setValidatingUser] = useState(true);
-    const navigate = useNavigate();
-    const containerStyles = {
-        background: 'rgb(240,249,255)',
-        backgroundImage: 'linear-gradient(90deg, rgba(240,249,255,1) 0%, rgba(198,232,255,1) 35%, rgba(70,181,255,1) 100%)',
-      };
-
-    useEffect(() => {
-        axiosClient
-            .get('/me')
-            .then(({ data }) => {
-                setCurrentUser(data);
-                if (data.role === 'manager') {
-                    navigate('../../management')
-                }else if (data.role === 'customer') {
-                    navigate('../../app')
-                }else if (data.role === 'driver') {
-                    navigate('../../workdrive')
-                }else if (data.role === 'employee') {
-                    navigate('../../workspace')
-                }
-                setValidatingUser(false);
-            })
-            .catch(() => {
-                setValidatingUser(false);
-            });
-    }, [navigate, setCurrentUser, userToken]);
-
-    if (validatingUser) {
-        return <GuestSkeleton />;
-    }
-    
-    return (
-        <div style={containerStyles}>
-            <GuestNav />
-            <div className="h-24"></div>
-            <Outlet />
-            <Footer />
-        </div>
-    )
+  return (
+    <div className="relative">
+      <div
+        className="absolute inset-0 z-0 overflow-hidden blur-10xl"
+        aria-hidden="true"
+        style={{
+          background: 'linear-gradient(to bottom right, #d66931, #dc3545)',
+          clipPath:
+            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+        }}
+      />
+      <div className="relative z-10">
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </div>
+    </div>
+  );
 }
