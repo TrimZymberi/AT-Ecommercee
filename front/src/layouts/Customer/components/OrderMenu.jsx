@@ -13,6 +13,8 @@ export default function OrderMenu() {
     const [isActive, setIsActive] = useState(false);
     const [lowhiFilter, setlowhiFilter] = useState(false);
     const { currentUser, setCurrentUser } = useStateContext();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filtersActive, setFiltersActive] = useState(false);
 
     useEffect(() => {
         axiosClient
@@ -26,13 +28,15 @@ export default function OrderMenu() {
             .get('/me')
             .then(({ data }) => {
                 setCurrentUser(data);
-
             })
             .catch(error => {
                 console.error('Error fetching categories:', error);
             });
-    }, []);
-    
+
+        setFiltersActive(searchQuery.trim() !== '' || lowhiFilter);
+    }, [searchQuery, lowhiFilter]);
+
+
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
     };
@@ -65,10 +69,25 @@ export default function OrderMenu() {
         )
             ;
     }
+
     const renderProducts = (tabName) => {
-        const selectedCategory = categories.find(category => category.name === tabName);
+        const selectedCategory = categories.find((category) => category.name === tabName);
         if (selectedCategory) {
-            return selectedCategory.products.map((item, index) => {
+            let productsToDisplay = selectedCategory.products;
+
+            if (searchQuery.trim() !== '') {
+                productsToDisplay = productsToDisplay.filter((product) =>
+                    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            }
+
+            if (lowhiFilter) {
+                productsToDisplay.sort((a, b) => a.retail_price - b.retail_price);
+            } else {
+                productsToDisplay.sort((a, b) => b.retail_price - a.retail_price);
+            }
+
+            return productsToDisplay.map((item, index) => {
                 const imageURL = item.preview.replace('GfcRct', '');
                 return (
                     <ProductCard
@@ -87,6 +106,7 @@ export default function OrderMenu() {
         return null;
     };
 
+
     return (
         <div className='parent'>
             <div className="bg-white">
@@ -101,48 +121,17 @@ export default function OrderMenu() {
                                     Search
                                 </label>
                                 <div className="flex items-center gap-2">
-                                    <button type='submit' onClick={() => {}} className="flex items-center active:scale-105 active:ring-red-200 p-2">
-                                        <svg
-                                            className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                            aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                        >
-                                            <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                                            />
-                                        </svg>
-                                    </button>
                                     <input
                                         type="search"
                                         id="default-search"
                                         className="block w-full text-sm bg-white text-gray-900 bg-transparent rounded-md border-2 border-gray-200 shadow-sm"
-                                        placeholder="Any favorites?"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)} placeholder="Any favorites?"
                                         required
                                     />
                                 </div>
                             </form>
                             <div className='flex gap-2'>
-                                <button
-                                    className={`bg-gray-100 active:scale-105 transition text-gray-700 p-1 rounded-lg ${isActive ? '' : 'ring-2 ring-red-200'}`}
-                                    onClick={handleButtonClick}
-                                    type='button'
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
-                                        stroke="currentColor"
-                                        className={`w-6 h-6 transform transition-transform ${isActive ? 'rotate-180' : ''}`}
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
-                                    </svg>
-                                </button>
                                 <div className='grid grid-cols-1 bg-gray-100 active:scale-105 transition p-1 rounded-lg'>
                                     <button
                                         className='font-semibold text-xs focus:outline-none'
@@ -161,8 +150,13 @@ export default function OrderMenu() {
                                         {lowhiFilter ? 'LOW' : 'HIGH'}
                                     </button>
                                 </div>
-                                <button onClick={() => {}} className='bg-red-100 text-red-900 hover:bg-red-200 transition active:scale-105 text-xs font-semibold uppercase p-1 rounded-lg' >
-                                    Clear
+                                <button
+                                    onClick={() => {
+                                        setSearchQuery('');
+                                        setlowhiFilter(false);
+                                    }}
+                                    className={`${filtersActive ? '' : 'hidden'}bg-red-100 text-red-900 hover:bg-red-200 transition active:scale-105 text-xs font-semibold uppercase p-1 rounded-lg`}>
+                                    {filtersActive && (<>Clear</>)}
                                 </button>
                             </div>
                         </div>

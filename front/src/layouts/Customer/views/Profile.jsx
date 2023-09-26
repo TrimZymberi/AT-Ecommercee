@@ -4,6 +4,7 @@ import { useStateContext } from '../../../contexts/ContextProvider';
 import SimpleLoader from '../../Universal/core/SimpleLoader';
 import Swal from 'sweetalert2';
 import ProfileSkeleton from './core/Profile_skeleton';
+import { usePopup } from '../../../contexts/PopupContext';
 
 export default function Profile() {
   const { currentUser, setCurrentUser } = useStateContext();
@@ -11,6 +12,7 @@ export default function Profile() {
   const [submitting, setSubmitting] = useState(false);
   const [inputErrorList, setInputErrorList] = useState('');
   const [globalError, setGlobalError] = useState('');
+  const { showAlert, showPopup, hideAlert } = usePopup();
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -64,10 +66,7 @@ export default function Profile() {
 
     try {
       const res = await axiosClient.put(`/userprofile/${currentUser.id}`, data);
-      Swal.fire({
-        icon: "success",
-        text: res.data.message,
-      });
+      showAlert();
     } catch (error) {
       if (error.response) {
         if (error.response.status === 422) {
@@ -127,6 +126,23 @@ export default function Profile() {
   return (
     <div className='parent bg-black bg-opacity-60 backdrop-blur-3xl h-screen w-screen flex flex-col items-center justify-center'>
       <title>Prese | Edit Profile</title>
+      {showPopup && (
+        <div id="toast-success" class="fixed top-2 right-6 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white backdrop-blur-sm bg-opacity-90 rounded-lg" role="alert">
+        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-emerald-100 rounded-lg">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+            </svg>
+            <span class="sr-only">Check icon</span>
+        </div>
+        <div class="ml-1 text-sm font-normal">Profile was updated successfully.</div>
+        <button type="button" onClick={hideAlert} class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-success" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+      )}
       <div className='rounded-md bg-white p-12 shadow-xl w-screen flex items-center justify-center'>
         <form onSubmit={(event) => editUser(event)} className='flex flex-col justify-center items-center rounded-md gap-4'>
           <div className='flex flex-col items-center justify-center mb-10'>

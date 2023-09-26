@@ -84,11 +84,11 @@ export default function Home() {
                         fugiat veniam occaecat fugiat aliqua.
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <div
-                            className="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-800 transition:1s focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        <Link to="/login"
+                            className="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-800 transition:1s focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:cursor-pointer"
                         >
                             Online Delivery
-                        </div>
+                        </Link>
                         <div className="text-sm font-semibold leading-6 text-gray-900 transition duration-500 hover:translate-x-1 active:translate-x-4">
                             <Link to='/aboutus' >Learn more  <span aria-hidden="true">→</span></Link>
                         </div>

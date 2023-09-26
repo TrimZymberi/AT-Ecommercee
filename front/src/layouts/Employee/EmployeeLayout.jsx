@@ -50,9 +50,7 @@ export default function EmployeeLayout() {
             />
             <div className="relative z-10">
                 <Navbar />
-                <div className='h-32 bg-white'></div>
                 <Outlet />
-                <Footer />
             </div>
         </div>
     )

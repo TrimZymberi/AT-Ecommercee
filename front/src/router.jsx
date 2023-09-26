@@ -18,7 +18,6 @@ import ProductEdit from "./layouts/Manager/components/ProductEdit";
 import Order from "./layouts/Customer/views/Order"
 import OrderHistory from "./layouts/Customer/views/OrderHistory";
 import ManageOrder from "./layouts/Employee/views/ManageOrder";
-import OurLocations from "./layouts/Universal/views/OurLocations";
 import OrderList from "./layouts/Manager/views/OrderList"
 import OrderRegister from "./layouts/Manager/components/OrderRegister"
 import EmployeeDashboard from "./layouts/Employee/views/Dashboard";
@@ -49,10 +48,6 @@ const router = createBrowserRouter([
             {
                 path: 'aboutus',
                 element: <AboutUs />
-            },
-            {
-                path: 'ourlocations',
-                element: <OurLocations />
             },
             {
                 path: '/login',
@@ -199,10 +194,10 @@ const router = createBrowserRouter([
             }
         ]
     },
-    // {
-    //     path: "*",
-    //     element: <NotFound />
-    // }
+    {
+        path: "*",
+        element: <NotFound />
+    }
 ])
 
 export default router

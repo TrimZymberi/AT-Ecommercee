@@ -42,10 +42,10 @@ export default function OfferSlider() {
     };
 
     return (
-        <div className="py-24 px-14">
-            <div className="py-6 px-6 rounded-md bg-transparent ">
+        <div className="transition group mt-12">
+            <div className="bg-transparent">
                 <div id="gallery" className="relative w-full" data-carousel="slide">
-                    <div className="relative h-96 shadow-xl overflow-hidden rounded-lg">
+                    <div className="relative h-96 shadow-xl overflow-hidden">
                         {slideData.map((slide, index) => (
                             <div
                                 key={index}
@@ -53,18 +53,12 @@ export default function OfferSlider() {
       duration-700 ease-in-out`}
                                 data-carousel-item={index === activeSlide ? 'active' : null}
                             >
-                                <img src={slide.imageUrl} className='w-full' alt='' />
-                                <div className='absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/80 to-transparent'>
-                                    <a href={slide.linkUrl}>
+                                <img src={slide.imageUrl} className='w-full hover:scale-105 transition duration-400 group-hover:scale-105' alt='' />
+                                <div className='absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/80 to-transparent sm:bg-transparent bg-red-500 sm:bg-opacity-100 sm:backdrop-blur-0 bg-opacity-70 backdrop-blur-lg duration-400'>
+                                    <div>
                                         <h5 className='mb-2 text-2xl font-bold tracking-tight text-white'>{slide.title}</h5>
-                                    </a>
+                                    </div>
                                     <p className='mb-3 font-normal text-white'>{slide.description}</p>
-                                    <a
-                                        href={slide.linkUrl}
-                                        className='bg-white/70 hover:bg-white/80 font-bold py-2 px-4 rounded-lg group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none'
-                                    >
-                                        Order Now
-                                    </a>
                                 </div>
                             </div>
                         ))}

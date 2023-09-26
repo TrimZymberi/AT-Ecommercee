@@ -150,7 +150,7 @@ export default function DriverOrder() {
         return (
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div className="grid items-start justify-start">
-                    <table className="grid grid-cols-2 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table className="grid grid-cols-2 w-full text-sm text-left text-gray-500">
                         <thead className="border-r-2 text-xs border-gray-100 uppercase bg-white">
                             <tr className="grid grid-cols-1 justify-start bg-white">
                                 <th scope="col" className="p-4">Driver: {currentUser.name}</th>
@@ -166,9 +166,6 @@ export default function DriverOrder() {
                                 <th scope="col" className="px-6 py-10">
                                     City & Address
                                 </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Action
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -179,7 +176,7 @@ export default function DriverOrder() {
                                         <td>{getStatusTableColor(order.status)}</td>
                                         <td
                                             scope="row"
-                                            className="flex items-center justify-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                            className="flex items-center justify-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                                         >
                                             <div className="text-center">
                                                 <button
@@ -269,7 +266,7 @@ export default function DriverOrder() {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div className="grid items-start justify-start">
-                <table className="grid grid-cols-2 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <table className="grid grid-cols-2 w-full text-sm text-left text-gray-500">
                     <thead className="border-r-2 text-xs border-gray-100 uppercase bg-white">
                         <tr className="grid grid-cols-1 justify-start bg-white">
                             <th scope="col" className="ml-2 text-black">Driver: <span className='text-gray-500'>{currentUser.name}</span></th>
@@ -285,12 +282,9 @@ export default function DriverOrder() {
                             <th scope="col" className="px-6 py-10">
                                 City & Address
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Action
-                            </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='bg-white'>
                         {orders && orders.length > 0 ? (
                             orders.map((order) => (
                                 <tr key={order.id} className="grid grid-cols-1 bg-white">
@@ -298,7 +292,7 @@ export default function DriverOrder() {
                                     <td>{getStatusTableColor(order.status)}</td>
                                     <td
                                         scope="row"
-                                        className="flex items-center justify-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        className="flex items-center justify-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                                     >
                                         <div className="text-center">
                                             <button
@@ -377,14 +371,14 @@ export default function DriverOrder() {
                     <div className="flex justify-between px-4 py-3">
                         <h5
                             onClick={closeModal}
-                            className="text-sm font-semibold text-gray-600 cursor-pointer dark:text-gray-400"
+                            className="text-sm font-semibold text-gray-600 cursor-pointer"
                         >
                             Close
                         </h5>
-                        <h5 className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                        <h5 className="text-sm font-semibold text-gray-600">
                             Order Details
                         </h5>
-                        <h5 className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                        <h5 className="text-sm font-semibold text-gray-600">
                             &nbsp;
                         </h5>
                     </div>
@@ -400,27 +394,27 @@ export default function DriverOrder() {
                                             alt="food icon"
                                             className="w-24 h-24 mx-auto rounded-md"
                                         />
-                                        <h5 className="text-xl font-bold text-gray-800 dark:text-white text-center">
+                                        <h5 className="text-xl font-bold text-gray-800 text-center">
                                             {item.product.name}
                                         </h5>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+                                        <p className="text-sm text-gray-500 text-center">
                                             {item.product.description}
                                         </p>
                                     </div>
                                     <div className="grid grid-cols-1 gap-6 border-y-2 border-r-2 p-4">
                                         <div className="grid grid-cols-2 items-center">
-                                            <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                            <h5 className="text-sm font-bold text-gray-800">
                                                 Quantity
                                             </h5>
-                                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                            <p className="mt-1 text-sm text-gray-500">
                                                 {item.quantity}
                                             </p>
                                         </div>
                                         <div className="grid grid-cols-2 items-center">
-                                            <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                            <h5 className="text-sm font-bold text-gray-800">
                                                 Price
                                             </h5>
-                                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                            <p className="mt-1 text-sm text-gray-500">
                                                 {item.product.retail_price}EUR
                                             </p>
                                         </div>
@@ -434,7 +428,7 @@ export default function DriverOrder() {
                                 .map((item) => (
                                     <div key={item.id} className="grid grid-cols-2">
                                         <div className="grid grid-cols-1 border-y-2 gap-2 p-4 border-l-2 items-center">
-                                            <h5 className="text-xl font-bold text-gray-800 dark:text-white text-center">
+                                            <h5 className="text-xl font-bold text-gray-800 text-center">
                                                 Total of order
                                             </h5>
                                             <h3 className="font-bold text-gray-700">Comment / Request</h3>
@@ -444,34 +438,34 @@ export default function DriverOrder() {
                                         </div>
                                         <div className="grid grid-cols-1 gap-6 border-y-2 border-r-2 p-4">
                                             <div className="grid grid-cols-2 items-center">
-                                                <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                <h5 className="text-sm font-bold text-gray-800">
                                                     Order ID
                                                 </h5>
-                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                <p className="mt-1 text-sm text-gray-500">
                                                     #{item.id}
                                                 </p>
                                             </div>
                                             <div className="grid grid-cols-2 items-center">
-                                                <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                <h5 className="text-sm font-bold text-gray-800">
                                                     City
                                                 </h5>
-                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                                <p className="mt-1 text-sm text-gray-500 whitespace-nowrap">
                                                     {item.user.city}
                                                 </p>
                                             </div>
                                             <div className="grid grid-cols-2 items-center">
-                                                <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                <h5 className="text-sm font-bold text-gray-800">
                                                     Address
                                                 </h5>
-                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                <p className="mt-1 text-sm text-gray-500">
                                                     {item.user.address}
                                                 </p>
                                             </div>
                                             <div className="grid grid-cols-2 items-center">
-                                                <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                <h5 className="text-sm font-bold text-gray-800">
                                                     Total
                                                 </h5>
-                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                <p className="mt-1 text-sm text-gray-500">
                                                     {calculateTotal(selectedOrderItems)}EUR
                                                 </p>
                                             </div>

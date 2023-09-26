@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import { useStateContext } from '../../../../contexts/ContextProvider'
 
 export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilter, isActive, isDropdownOpen) {
-    const {currentUser} = useStateContext();
+    const { currentUser } = useStateContext();
     return (
         <div className="bg-white">
             <div className="bg-white px-2.5 pb-2.5">
                 <div className='flex items-center justify-between'>
-                    <div className='grid grid-cols-1 items-center gap-4 sm:grid-cols-2'>
+                    <div className='grid grid-cols-1 items-center gap-4 sm:grid-cols-2 mt-2'>
                         <form>
                             <label
                                 htmlFor="default-search"
@@ -16,8 +16,8 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                             >
                                 Search
                             </label>
-                            <div className="flex items-center bg-white p-0.5 hover:cursor-pointer border border-gray-300 rounded-lg px-2">
-                                <button onClick={() => ({})} disabled type="submit" className="flex items-center active:scale-105">
+                            <div className="flex items-center gap-2">
+                                <button type='submit' onClick={() => { }} className="flex items-center active:scale-105 active:ring-red-200 p-2">
                                     <svg
                                         className="w-5 h-5 text-gray-500 dark:text-gray-400"
                                         aria-hidden="true"
@@ -36,33 +36,14 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                                 <input
                                     type="search"
                                     id="default-search"
-                                    className="block w-full text-sm bg-white text-gray-900 border-none bg-transparent focus:outline-none focus:ring-0"
-                                    placeholder="Search Products"
+                                    className="block w-full text-sm bg-white text-gray-900 bg-transparent rounded-md border-2 border-gray-200 shadow-sm"
                                     required
                                 />
                             </div>
                         </form>
                         <div className='flex gap-2'>
-                            <button
-                                className={`bg-gray-100 active:scale-105 transition text-gray-700 p-1 rounded-lg ${isActive ? '' : ''}`}
-                                type='button'
-                                onClick={() => ({})}
-                                disabled
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className={`w-6 h-6 transform transition-transform ${isActive ? 'rotate-180' : ''}`}
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
-                                </svg>
-                            </button>
                             <div className='grid grid-cols-1 bg-gray-100 active:scale-105 transition p-1 rounded-lg'>
                                 <button
-                                    disabled
                                     className='font-semibold text-xs focus:outline-none'
                                     onClick={handlelowhi}
                                     type='button'
@@ -73,14 +54,12 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                                 <div className='border border-gray-900'></div>
                                 <button
                                     className={`font-semibold text-xs focus:outline-none ${handlelowhi ? 'text-gray-600' : ''}`}
+                                    onClick={handlelowhi}
                                     type='button'
                                 >
                                     {lowhiFilter ? 'LOW' : 'HIGH'}
                                 </button>
                             </div>
-                            <button disabled className='bg-red-100 text-red-900 hover:bg-red-200 transition active:scale-105 text-xs font-semibold uppercase p-1 rounded-lg' type='submit'>
-                                Clear
-                            </button>
                         </div>
                     </div>
                     <div className=' '>

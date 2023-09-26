@@ -76,4 +76,4 @@ Route::get('user/{id}/edit', [UserController::class, 'edit']);
 Route::delete('user/{id}/delete', [UserController::class, 'destroy']);
 Route::get('/users/count', [UserController::class, 'count']);
 
-Route::post('/subscribe', [SubscriberController::class, 'subscribe']);
+// Route::post('/subscribe', [SubscriberController::class, 'subscribe']);

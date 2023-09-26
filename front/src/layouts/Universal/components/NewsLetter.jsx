@@ -34,7 +34,7 @@ export default function NewsLetter() {
                             placeholder="Enter your email here..."
                             value={email}
                             onChange={(e) => setEmail(e.target.value)} />
-                        <button onClick={subscribe} type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2">Subscribe</button>
+                        <button onClick={subscribe} type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-redW-300 font-medium rounded-lg text-sm px-4 py-2" disabled>Subscribe</button>
                     </div>
                 </form>
             </div>

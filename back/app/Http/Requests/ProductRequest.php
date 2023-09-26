@@ -42,7 +42,7 @@ class ProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'preview' => 'nullable|string',
+            'preview' => 'Please input an image, an image is required currently there is no image.',
             'name.required' => 'Product name is required.',
             'name.string' => 'Product name must be a string.',
             'name.max' => 'Product name may not be greater than 255 characters.',

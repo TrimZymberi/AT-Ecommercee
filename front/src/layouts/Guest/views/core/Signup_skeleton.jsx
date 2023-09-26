@@ -5,7 +5,7 @@ export default function Signup_skeleton() {
     return (
         <div className="bg-black backdrop-filter backdrop-blur-xl bg-opacity-50">
             <div className="flex items-center justify-center">
-                <title>Prese | Signup</title>
+                <title>Prese | Signing up</title>
 
                 <div className="bg-white backdrop-blur-sm bg-opacity-90 px-20 py-16 shadow-sm rounded-sm m-10">
                     <h2 className="mb-3 text-center font-bold text-4xl">Sign up</h2>

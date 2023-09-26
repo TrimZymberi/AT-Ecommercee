@@ -232,6 +232,14 @@ export default function OrderHistoryTable() {
         )
     }
 
+    if (orders.length === 0) {
+        return (
+            <div className='h-screen flex justify-center items-center text-4xl bg-white font-bold'>
+                <p>You have not made an order yet, make an order <Link to={'../order'} className='underline transition hover:text-red-900'>here</Link>.</p>
+            </div>
+        );
+    }
+
     return (
         <div className="relative overflow-auto">
             <div className='grid bg-transparent bg-white '>
