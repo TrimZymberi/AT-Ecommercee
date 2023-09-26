@@ -10,7 +10,7 @@ export default function ProductCard(item) {
         if (currentUser.role !== 'customer') {
             navigate('/login');
         } else {
-            navigate('../orders');
+            navigate('../order');
         }
     };
 
