@@ -198,12 +198,12 @@ export default function Signup() {
 
             {error.password && (
               <div
-                class="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50"
+                className="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50"
                 role="alert"
               >
                 <svg
                   aria-hidden="true"
-                  class="flex-shrink-0 inline w-5 h-5 mr-3"
+                  className="flex-shrink-0 inline w-5 h-5 mr-3"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -214,12 +214,12 @@ export default function Signup() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span class="sr-only">Danger</span>
-                <div>
-                  <span class="font-medium">
+                <span className="sr-only">Danger</span>
+                <div className="w-full">
+                  <span className="font-medium">
                     Ensure that these requirements are met:
                   </span>
-                  <ul class="mt-1.5 ml-4 list-disc list-inside">
+                  <ul className="mt-1.5 ml-4 list-disc list-inside">
                     {error.name && (
                       <li dangerouslySetInnerHTML={{ __html: error.name }}></li>
                     )}
@@ -247,12 +247,12 @@ export default function Signup() {
             )}
             {error.other && (
               <div
-                class="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50"
+                className="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50"
                 role="alert"
               >
                 <svg
                   aria-hidden="true"
-                  class="flex-shrink-0 inline w-5 h-5 mr-3"
+                  className="flex-shrink-0 inline w-5 h-5 mr-3"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -263,12 +263,12 @@ export default function Signup() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span class="sr-only">Danger</span>
+                <span className="sr-only">Danger</span>
                 <div>
-                  <span class="font-medium">
+                  <span className="font-medium">
                     Ensure that these requirements are met:
                   </span>
-                  <ul class="mt-1.5 ml-4 list-disc list-inside">
+                  <ul className="mt-1.5 ml-4 list-disc list-inside">
                     {error.other && (
                       <li
                         dangerouslySetInnerHTML={{ __html: error.other }}
