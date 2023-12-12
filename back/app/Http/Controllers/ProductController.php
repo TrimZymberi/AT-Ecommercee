@@ -223,7 +223,7 @@ class ProductController extends Controller
     {
         if (preg_match('/^data:image\/(\w+);base64,/', $image, $type)) {
             $image = substr($image, strpos($image, ',') + 1);
-            $type = strtolower($type[1]); // jpg, png, gif
+            $type = strtolower($type[1]);
 
             if (!in_array($type, ['jpg', 'jpeg', 'gif', 'png'])) {
                 throw new \Exception('Invalid image type. Only JPG, JPEG, GIF, and PNG are supported.');

@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom'; // Include useLocation
-import axiosClient from '../../../api/axios';
-import { useStateContext } from '../../../contexts/ContextProvider';
-import navLinksData from '../data/NavLinksData';
-import img from '../images/WEBDEV.svg';
-import NavbarSkeleton from './core/Navbar_skeleton';
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom"; // Include useLocation
+import axiosClient from "../../../api/axios";
+import { useStateContext } from "../../../contexts/ContextProvider";
+import navLinksData from "../data/NavLinksData";
+import img from "../images/WEBDEV.svg";
+import NavbarSkeleton from "./core/Navbar_skeleton";
 
 export default function Navbar() {
-  const { currentUser, userToken, setCurrentUser, setUserToken } = useStateContext();
+  const { currentUser, userToken, setCurrentUser, setUserToken } =
+    useStateContext();
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [loadingUser, setLoadingUser] = useState(true);
 
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
 
   useEffect(() => {
     axiosClient
-      .get('/me')
+      .get("/me")
       .then(({ data }) => {
         setCurrentUser(data);
         setLoadingUser(false);
@@ -33,22 +34,22 @@ export default function Navbar() {
   const logout = (ev) => {
     ev.preventDefault();
 
-    axiosClient.post('/logout').then(() => {
+    axiosClient.post("/logout").then(() => {
       setCurrentUser({});
       setUserToken(null);
-      navigate('/home');
+      navigate("/home");
     });
   };
 
   let filteredLinks;
   if (userToken) {
-    if (currentUser.role === 'customer') {
+    if (currentUser.role === "customer") {
       filteredLinks = navLinksData.customerLinks;
-    } else if (currentUser.role === 'employee') {
+    } else if (currentUser.role === "employee") {
       filteredLinks = navLinksData.employeeLinks;
-    } else if (currentUser.role === 'driver') {
+    } else if (currentUser.role === "driver") {
       filteredLinks = navLinksData.driverLinks;
-    } else if (currentUser.role === 'manager') {
+    } else if (currentUser.role === "manager") {
       filteredLinks = navLinksData.managerLinks;
     }
   } else {
@@ -60,7 +61,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60`}>
+    <nav
+      className={`z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60`}
+    >
       <div className="max-w-screen-l flex flex-wrap items-center justify-between mx-auto p-3">
         <div className="flex items-center">
           <span className="self-center text-2xl font-bold whitespace-nowrap text-red-500">
@@ -73,7 +76,7 @@ export default function Navbar() {
             type="button"
             className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
             aria-controls="navbar-cta"
-            aria-expanded={isMenuOpen ? 'true' : 'false'}
+            aria-expanded={isMenuOpen ? "true" : "false"}
             onClick={handleMenuToggle}
           >
             <span className="sr-only">Open main menu</span>
@@ -93,7 +96,7 @@ export default function Navbar() {
         </div>
         <div
           className={`items-center justify-between bg-transparent ${
-            isMenuOpen ? 'flex' : 'hidden'
+            isMenuOpen ? "flex" : "hidden"
           } w-full md:flex md:w-auto md:order-2`}
           id="navbar-cta"
         >
@@ -101,13 +104,14 @@ export default function Navbar() {
             {filteredLinks.map((link) => (
               <li key={link.text}>
                 <NavLink
-                  exact={true}
                   to={link.to}
                   className={`nav-link hover:text-red-600 py-2 px-4 rounded-md ${
-                    location.pathname === link.to ? 'text-red-500' : 'text-black'
+                    location.pathname === link.to
+                      ? "text-red-500"
+                      : "text-black"
                   }`}
                   onClick={(ev) => {
-                    if (link.text === 'Log out') {
+                    if (link.text === "Log out") {
                       logout(ev);
                     }
                   }}
