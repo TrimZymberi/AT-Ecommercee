@@ -97,6 +97,7 @@ export default function Signup() {
                 <input
                   type="text"
                   name="username"
+                  autoComplete="off"
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Enter username"
                   value={username}
@@ -113,6 +114,7 @@ export default function Signup() {
                 <input
                   type="email"
                   name="email"
+                  autoComplete="off"
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Enter email"
                   value={email}
@@ -158,6 +160,7 @@ export default function Signup() {
                 className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Write your address here"
                 value={address}
+                autoComplete="off"
                 onChange={(ev) => setAddress(ev.target.value)}
               />
             </div>
@@ -175,6 +178,7 @@ export default function Signup() {
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Enter password"
                   value={password}
+                  autoComplete="off"
                   onChange={(ev) => setPassword(ev.target.value)}
                 />
               </div>
@@ -188,6 +192,7 @@ export default function Signup() {
                 <input
                   type="password"
                   name="confirm-password"
+                  autoComplete="off"
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2"
                   placeholder="Confirm password"
                   value={passwordConfirmation}

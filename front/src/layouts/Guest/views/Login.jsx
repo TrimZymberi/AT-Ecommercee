@@ -126,6 +126,7 @@ export default function Login() {
                 className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Enter email"
                 value={email}
+                autoComplete="off"
                 onChange={(ev) => setEmail(ev.target.value)}
               />
             </div>
@@ -142,6 +143,7 @@ export default function Login() {
                 className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Enter password"
                 value={password}
+                autoComplete="off"
                 onChange={(ev) => setPassword(ev.target.value)}
               />
             </div>

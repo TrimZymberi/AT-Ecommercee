@@ -145,7 +145,7 @@ export default function ProductTable() {
   let ProductDetails = "";
   ProductDetails = product.map((item, index) => {
     const createdDate = new Date(item.created_at);
-    const imageURL = item.preview.replace("front", "");
+    const imageURL = item.preview.replace("GfcRct", "");
     console.log(imageURL + item.id);
     if (loadingData) {
       return (

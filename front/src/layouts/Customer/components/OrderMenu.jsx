@@ -79,7 +79,7 @@ export default function OrderMenu() {
       }
 
       return productsToDisplay.map((item, index) => {
-        const imageURL = item.preview.replace("front", "");
+        const imageURL = item.preview.replace("GfcRct", "");
         return (
           <ProductCard
             id={item.id}

@@ -337,7 +337,7 @@ export default function OrderHistoryTable() {
           <div className="px-4 py-6 grid gap-2 sm:grid-cols-1 md-grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {selectedOrderItems.order_items.map((item) => {
               const imageUrl = (imageUrl) => {
-                return imageUrl.replace("", "../");
+                return imageUrl.replace("GfcRct", "../");
               };
               return (
                 <div key={item.id} className="grid grid-cols-2">
