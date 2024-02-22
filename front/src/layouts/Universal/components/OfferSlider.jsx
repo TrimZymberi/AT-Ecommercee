@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 const slideData = [
   {
     imageUrl: "/src/layouts/Universal/images/slider1.jpg",

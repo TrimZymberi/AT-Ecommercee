@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axiosClient from "../../../api/axios";
 import ProductCard from "./ProductCard";
 import ProductDisplaySkeleton from "./core/ProductDisplayTab_skeleton";
 
-export default function xsxccxCategoryTab() {
+export default function CategoryTab() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState("");

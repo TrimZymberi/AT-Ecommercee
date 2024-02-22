@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import { useState } from "react";
@@ -13,7 +13,6 @@ export default function Login() {
   const [error, setError] = useState({ __html: "" });
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     clearURLParameters();
