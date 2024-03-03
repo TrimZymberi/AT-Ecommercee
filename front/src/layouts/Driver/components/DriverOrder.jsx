@@ -118,7 +118,7 @@ export default function DriverOrder() {
   };
 
   let convertImageURL = (items) => {
-    const imageURL = items.replace("", "../");
+    const imageURL = items.replace("front", "");
     return imageURL;
   };
 
