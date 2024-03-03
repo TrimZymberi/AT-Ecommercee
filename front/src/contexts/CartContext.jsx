@@ -6,8 +6,8 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const { userToken } = useStateContext();
   const [cartItems, setCartItems] = useState(
-    localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
+    localStorage.getItem("cart_items")
+      ? JSON.parse(localStorage.getItem("cart_items"))
       : []
   );
 
@@ -43,13 +43,6 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    if (userToken === null) {
-      console.log("ran");
-      setCartItems([]);
-    }
-  }, [userToken]);
-
   const clearCart = () => {
     setCartItems([]);
   };
@@ -62,11 +55,11 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    const cartItems = localStorage.getItem("cartItems");
+    const cartItems = localStorage.getItem("cart_items");
     if (cartItems) {
       setCartItems(JSON.parse(cartItems));
     }

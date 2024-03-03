@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import Input from "./common/Input";
 import ErrorMessage from "./common/ErrorMessage";
 import Button from "./common/Button";
-import SpinnerIcon from "./icons/SpinnerIcon";
 import CategoryRegisterSubmitSkeleton from "./Category/CategoryRegister_submit";
 
 export default function CategoryRegister() {

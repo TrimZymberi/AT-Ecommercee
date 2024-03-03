@@ -1,65 +1,38 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
     <footer className="bg-white">
       <div className="mx-auto w-full max-w-screen-xl">
-        <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
-          <div>
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+        <div className="grid grid-cols-2  gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
+          <div className="z-20">
+            <h2 className="mb-3 text-sm font-semibold text-gray-900 uppercase">
               Shortcuts
             </h2>
             <ul className="text-gray-500 font-medium">
-              <li className="mb-4">
+              <li className="mb-2">
                 <Link to="/home" className="hover:underline">
                   Home
                 </Link>
               </li>
-              <li className="mb-4">
+              <li className="mb-2">
                 <Link to="/aboutus" className=" hover:underline">
                   About
                 </Link>
               </li>
-              <li className="mb-4">
-                <Link to="/ourlocations" className="hover:underline">
-                  Our Locations
+              <li className="mb-2">
+                <Link to="/signup" className="hover:underline">
+                  Sign up
                 </Link>
               </li>
-              <li className="mb-4">
-                <Link to="/myorders" className="hover:underline">
-                  My Orders
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
-              Contact us
-            </h2>
-            <ul className="text-gray-500 font-medium">
-              <li className="mb-4">
-                <Link to="#" className="hover:underline">
-                  Discord Server
-                </Link>
-              </li>
-              <li className="mb-4">
-                <Link to="#" className="hover:underline">
-                  Twitter
-                </Link>
-              </li>
-              <li className="mb-4">
-                <Link to="#" className="hover:underline">
-                  Facebook
-                </Link>
-              </li>
-              <li className="mb-4">
-                <Link to="#" className="hover:underline">
-                  Contact Us
+              <li className="mb-2">
+                <Link to="/login" className="hover:underline">
+                  Login
                 </Link>
               </li>
             </ul>
           </div>
+
           <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
               Contact us

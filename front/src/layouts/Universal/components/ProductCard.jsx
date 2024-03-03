@@ -22,13 +22,13 @@ export default function ProductCard(item) {
           alt="product image"
         />
       </div>
-      <div className="flex flex-col px-2 py-0.5">
-        <div>
+      <div className="px-2 py-0.5">
+        <div className="">
           <h5 className="text-[2rem] font-semibold tracking-tight text-gray-900">
             {item.name}
           </h5>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center flex-row justify-between">
           <span className="text-3xl font-bold text-gray-900">
             {item.retail_price}EUR
           </span>

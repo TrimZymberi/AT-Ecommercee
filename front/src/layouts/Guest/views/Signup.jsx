@@ -304,7 +304,7 @@ export default function Signup() {
               <Link
                 type="button"
                 to="../"
-                className="text-center hover:border-gray-500 hover:shadow-sm border-transparent transition border-2 w-full mt-2 p-2 rounded active:cursor-wait hover:bg-gray-50"
+                className="text-center hover:border-gray-500 hover:shadow-sm border-gray-500 bg-white transition border-2 w-full mt-2 p-2 rounded active:cursor-wait hover:bg-gray-50"
               >
                 CONTINUE AS GUEST
               </Link>

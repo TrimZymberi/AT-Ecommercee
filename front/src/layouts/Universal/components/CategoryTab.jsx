@@ -81,7 +81,7 @@ export default function CategoryTab() {
         </ul>
       </div>
       <div className="mt-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4 px-20 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4 xl:px-20 lg:px-16 md:px-12 sm:px-8 px-4 gap-6">
           {renderProducts(selectedTab)}
         </div>
       </div>

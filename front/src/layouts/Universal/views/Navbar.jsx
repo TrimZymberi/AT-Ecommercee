@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate, useLocation } from "react-router-dom"; // Include useLocation
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import axiosClient from "../../../api/axios";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import navLinksData from "../data/NavLinksData";
@@ -35,6 +35,9 @@ export default function Navbar() {
     ev.preventDefault();
 
     axiosClient.post("/logout").then(() => {
+      if (currentUser.role === "customer") {
+        localStorage.removeItem("cart_items");
+      }
       setCurrentUser({});
       setUserToken(null);
       navigate("/home");
