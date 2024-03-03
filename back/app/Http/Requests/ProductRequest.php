@@ -42,11 +42,11 @@ class ProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'preview' => 'Please input an image, an image is required currently there is no image.',
+            'preview' => 'Please select an image.',
             'name.required' => 'Product name is required.',
             'name.string' => 'Product name must be a string.',
             'name.max' => 'Product name may not be greater than 255 characters.',
-            'category_id.required' => 'Category ID is required.',
+            'category_id.required' => 'An category must be selected.',
             'description.required' => 'Product description is required.',
             'description.string' => 'Product description must be a string.',
             'retail_price.required' => 'Product retail price is required.',

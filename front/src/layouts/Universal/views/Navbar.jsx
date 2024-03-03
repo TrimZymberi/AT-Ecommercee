@@ -25,7 +25,7 @@ export default function Navbar() {
       .catch(() => {
         setLoadingUser(false);
       });
-  }, []);
+  }, [setCurrentUser]);
 
   if (loadingUser) {
     return <NavbarSkeleton />;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import { CartContext } from "../../../contexts/CartContext";
 import axiosClient from "../../../api/axios";
@@ -17,6 +17,7 @@ export default function Checkout() {
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [globalError, setGlobalError] = useState("");
   const navigate = useNavigate();
+  const pattern = /^(044|045)\s?\d+$/;
 
   useEffect(() => {
     if (!userToken) {
@@ -40,7 +41,7 @@ export default function Checkout() {
       .catch(() => {
         setValidatingUser(false);
       });
-  }, [navigate, setCurrentUser]);
+  }, [navigate, setCurrentUser, userToken]);
 
   if (validatingUser) {
     return <SimpleLoader />;
@@ -49,19 +50,20 @@ export default function Checkout() {
   const handleCheckout = (event) => {
     event.preventDefault();
 
-    let numbercommentCheck = false; // Initialize as false
-
     if (phoneNumber.trim() === "") {
       setGlobalError(
         "Phone number is empty, please write a number in order for us to get in contact."
       );
-      console.error("Phone number error:", phoneNumberError);
       return;
     }
 
     if (commentEnabled && comment.trim() === "") {
       setGlobalError("Comment is empty, please write a comment.");
-      console.error("Comment is empty");
+      return;
+    }
+
+    if (!pattern.test(phoneNumber)) {
+      setGlobalError("Please enter a valid RKS phone number prefix.");
       return;
     }
 
@@ -87,7 +89,7 @@ export default function Checkout() {
         navigate("/app/orderhistory/orders:page");
       })
       .catch((error) => {
-        console.error("Error:feafseafdsafedsafe____", error);
+        console.error("Error:", error);
         setGlobalError(error);
       });
   };
@@ -100,8 +102,6 @@ export default function Checkout() {
     const inputText = e.target.value;
     setPhoneNumber(inputText);
 
-    const pattern = /^(044|045)\s?\d+$/;
-
     if (pattern.test(inputText)) {
       setInfoCheck(true);
       setPhoneNumberError("");
@@ -112,7 +112,7 @@ export default function Checkout() {
   };
 
   let convertImageURL = (items) => {
-    const imageURL = items.replace("../GfcRct", "");
+    const imageURL = items.replace("../front", "");
     return imageURL;
   };
 
@@ -563,9 +563,9 @@ export default function Checkout() {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                          clip-rule="evenodd"
+                          clipRule="evenodd"
                         ></path>
                       </svg>
                       <span className="sr-only">Danger</span>

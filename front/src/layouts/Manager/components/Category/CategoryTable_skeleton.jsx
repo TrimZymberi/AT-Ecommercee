@@ -1,8 +1,8 @@
-export default function ProductTable_skeleton() {
+export default function CategoryTableSkeleton() {
   return (
     <div
       role="status"
-      className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-95 max-w p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
+      className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-95 max-w p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded animate-pulse md:p-6"
     >
       <div className="flex items-center justify-between">
         <div>

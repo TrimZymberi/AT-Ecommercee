@@ -40,6 +40,7 @@ Route::delete('product/{id}/delete', [ProductController::class, 'destroy']);
 Route::get('product/search', [ProductController::class, 'search']);
 Route::get('/products', [ProductController::class, 'paginateProducts'])->name('products')->middleware('web');
 Route::get('/products/count', [ProductController::class, 'count']);
+// PRODUCTABLE CATEGORY NAME GETTER
 Route::get('/category/{id}/name', [ProductController::class, 'getCatName']);
 
 Route::get('category', [CategoryController::class, 'index']);
@@ -50,7 +51,9 @@ Route::get('category/{id}', [CategoryController::class, 'show']);
 Route::delete('category/{id}/delete', [CategoryController::class, 'destroy']);
 Route::get('/search', [CategoryController::class, 'search']);
 Route::get('/users/{id}/name', [CategoryController::class, 'getUserName']);
+// used to show categories for input
 Route::get('namecat', [CategoryController::class, 'categoryname']);
+// paginator
 Route::get('/categories', [CategoryController::class, 'getCategories'])->name('categories')->middleware('web');
 
 Route::get('driverls', [UserController::class, 'drivername']);

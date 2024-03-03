@@ -1,8 +1,10 @@
 import { createContext, useState, useEffect } from "react";
+import { useStateContext } from "./ContextProvider";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const { userToken } = useStateContext();
   const [cartItems, setCartItems] = useState(
     localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
@@ -40,6 +42,13 @@ export const CartProvider = ({ children }) => {
       );
     }
   };
+
+  useEffect(() => {
+    if (userToken === null) {
+      console.log("ran");
+      setCartItems([]);
+    }
+  }, [userToken]);
 
   const clearCart = () => {
     setCartItems([]);

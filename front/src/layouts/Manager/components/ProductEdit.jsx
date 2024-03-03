@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../../api/axios";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Swal from "sweetalert2";
-import ProductLoadingSkeleton from "./core/ProductLoading_skeleton";
-import ProductSubmittingSkeleton from "./core/ProductSubmitting_skeleton";
+import Textarea from "./common/Textarea";
+import Input from "./common/Input";
+import Select from "./common/Select";
+import ErrorMessage from "./common/ErrorMessage";
+import Button from "./common/Button";
+import File from "./common/File";
+import ProductEditLoadingSkeleton from "./Product/ProductEdit_load_skeleton";
+import ProductEditSubmitSkeleton from "./Product/ProductEdit_submit_skeleton";
 
 const ProductEdit = () => {
   const { currentUser } = useStateContext();
@@ -65,13 +71,10 @@ const ProductEdit = () => {
     if (currentUser) {
       setProduct({ ...product, user_id: currentUser.id });
     }
-  }, [currentUser]);
+  }, [currentUser, product]);
 
   const handleInput = (event) => {
     event.persist();
-    console.log("Input name:", event.target.name);
-    console.log("Input value:", event.target.value);
-
     if (event.target.name === "preview") {
       onImageChoose(event);
     } else if (event.target.name === "category_id") {
@@ -144,17 +147,17 @@ const ProductEdit = () => {
   }
 
   if (submitting) {
-    return <ProductSubmittingSkeleton />;
+    return <ProductEditSubmitSkeleton />;
   }
 
   if (loading) {
-    return <ProductLoadingSkeleton />;
+    return <ProductEditLoadingSkeleton />;
   }
 
   return (
-    <div>
+    <Fragment>
       <title>Prese | Product Edit</title>
-      <section className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 p-20">
+      <section className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="flex items-center mb-6 text-4xl font-semibold text-gray-900">
             Administrator Tools
@@ -168,167 +171,88 @@ const ProductEdit = () => {
                 onSubmit={(event) =>
                   updateProduct(event, currentUser ? currentUser.id : "")
                 }
-                className="space-y-4 md:space-y-6"
+                className="space-y-6 md:space-y-8"
               >
                 <input
                   type="hidden"
                   name="user_id"
                   value={currentUser ? currentUser.id : ""}
                 />
-                <div>
-                  <label
-                    htmlFor="preview"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Product preview
-                  </label>
-                  <input
-                    type="file"
-                    onChange={onImageChoose}
-                    name="preview"
-                    id="preview"
-                    className="bg-gray-50 border border-gray-300 text-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-4.5"
-                  />
-                  {inputErrorList.preview && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {inputErrorList.preview}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Product name
-                  </label>
-                  <input
-                    type="text"
-                    value={product.name}
-                    onChange={handleInput}
-                    name="name"
-                    id="name"
-                    className={`bg-gray-50 border ${
-                      inputErrorList.name ? "border-red-500" : "border-gray-300"
-                    } text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5`}
-                    placeholder="Product name"
-                  />
-                  {inputErrorList.name && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {inputErrorList.name}
-                    </p>
-                  )}
-                </div>
-                <div className="form-group  mb-2">
-                  <label
-                    htmlFor="Description"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Preview Description
-                  </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    placeholder="Product Description"
-                    value={product.description}
-                    onChange={handleInput}
-                  ></textarea>
-                  <div className="mt-1">
-                    <span className="text-red-500 text-sm mt-1">
-                      {inputErrorList.description}
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="category_id"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Product category
-                  </label>
-                  <select
-                    onChange={handleInput}
-                    name="category_id"
-                    id="category_id"
-                    className="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-4.5"
-                  >
-                    <option value={product.category_id} disabled selected>
-                      Select a Category
-                    </option>
-                    {categories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
-                  {inputErrorList.category && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {inputErrorList.category}
-                    </p>
-                  )}
-                </div>
-                <div className="mt-1">
-                  <span className="text-red-500 text-sm">
-                    {inputErrorList.category}
-                  </span>
-                </div>
-                <div>
-                  <label
-                    htmlFor="retail_price"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Retail Price
-                  </label>
-                  <input
-                    type="number"
-                    value={product.retail_price}
-                    onChange={handleInput}
-                    name="retail_price"
-                    id="retail_price"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    placeholder="Retail Price"
-                  />
-                  <div className="mt-1">
-                    <span className="text-red-500 text-sm">
-                      {inputErrorList.retail_price}
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="market_price"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Market Price
-                  </label>
-                  <input
-                    type="number"
-                    value={product.market_price}
-                    onChange={handleInput}
-                    name="market_price"
-                    id="market_price"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    placeholder="Market Price"
-                  />
-                  <div className="mt-1">
-                    <span className="text-red-500 text-sm">
-                      {inputErrorList.market_price}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                <File
+                  htmlFor="preview"
+                  labelName={"Product Image"}
+                  type="file"
+                  onChange={onImageChoose}
+                  name="preview"
+                  id="preview"
                 >
-                  Update
-                </button>
+                  <ErrorMessage>{inputErrorList.preview}</ErrorMessage>
+                </File>
+                <Input
+                  htmlFor="name"
+                  labelName="Product Name"
+                  type="text"
+                  value={product.name}
+                  onChange={handleInput}
+                  name="name"
+                  id="name"
+                  placeholder="Product Name"
+                >
+                  <ErrorMessage>{inputErrorList.name}</ErrorMessage>
+                </Input>
+                <Textarea
+                  htmlFor="description"
+                  labelName="Product Description"
+                  name="description"
+                  value={product.description}
+                  onChange={handleInput}
+                >
+                  <ErrorMessage>{inputErrorList.description}</ErrorMessage>
+                </Textarea>
+                <Select
+                  labelName="Product Category"
+                  htmlFor="category_id"
+                  optionName={
+                    categories.id === product.category_id
+                      ? categories.name
+                      : "Choose an category"
+                  }
+                  raw_data={categories}
+                  onChange={handleInput}
+                  name="category_id"
+                  id="category"
+                >
+                  <ErrorMessage>{inputErrorList.category_id}</ErrorMessage>
+                </Select>
+                <Input
+                  htmlFor="retail_price"
+                  labelName="Retail Price"
+                  type="number"
+                  value={product.retail_price}
+                  onChange={handleInput}
+                  name="retail_price"
+                  id="retail_price"
+                >
+                  <ErrorMessage>{inputErrorList.retail_price}</ErrorMessage>
+                </Input>
+                <Input
+                  htmlFor="market_price"
+                  labelName="Market Price"
+                  type="number"
+                  value={product.market_price}
+                  onChange={handleInput}
+                  name="market_price"
+                  id="market_price"
+                >
+                  <ErrorMessage>{inputErrorList.market_price}</ErrorMessage>
+                </Input>
+                <Button type="submit">Update</Button>
               </form>
             </div>
           </div>
         </div>
       </section>
-    </div>
+    </Fragment>
   );
 };
 
