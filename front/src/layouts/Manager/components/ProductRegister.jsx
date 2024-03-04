@@ -32,7 +32,7 @@ export default function ProductRegister() {
     if (currentUser) {
       setProduct({ ...product, user_id: currentUser.id });
     }
-  }, [currentUser, product]);
+  }, [currentUser]);
 
   // get categories
   useEffect(() => {

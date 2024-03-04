@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AshensoriController;
+use App\Http\Controllers\NdertesaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -50,7 +52,6 @@ Route::get('category/{id}/edit', [CategoryController::class, 'edit']);
 Route::get('category/{id}', [CategoryController::class, 'show']);
 Route::delete('category/{id}/delete', [CategoryController::class, 'destroy']);
 Route::get('/search', [CategoryController::class, 'search']);
-Route::get('/users/{id}/name', [CategoryController::class, 'getUserName']);
 // used to show categories for input
 Route::get('namecat', [CategoryController::class, 'categoryname']);
 // paginator
@@ -78,5 +79,28 @@ Route::put('userprofile/{id}/', [UserController::class, 'updateProfile']);
 Route::get('user/{id}/edit', [UserController::class, 'edit']);
 Route::delete('user/{id}/delete', [UserController::class, 'destroy']);
 Route::get('/users/count', [UserController::class, 'count']);
-
+Route::get('/users/{id}/name', [UserController::class, 'getUserName']);
 // Route::post('/subscribe', [SubscriberController::class, 'subscribe']);
+
+Route::get('ndertesa', [NdertesaController::class, 'index']);
+Route::post('ndertesa', [NdertesaController::class, 'create']);
+Route::put('ndertesa/{id}/', [NdertesaController::class, 'update']);
+Route::get('ndertesa/{id}/edit', [NdertesaController::class, 'edit']);
+Route::get('ndertesa/{id}', [NdertesaController::class, 'show']);
+Route::delete('ndertesa/{id}/delete', [NdertesaController::class, 'destroy']);
+Route::get('/search', [NdertesaController::class, 'search']);
+Route::get('/ndertesat', [NdertesaController::class, 'paginate'])->name('ndertesat')->middleware('web');
+
+// used to show categories for input
+
+Route::get('namendertesa', [NdertesaController::class, 'ndertesaname']);
+
+
+Route::get('ashensor', [AshensoriController::class, 'index']);
+Route::post('ashensor', [AshensoriController::class, 'create']);
+Route::put('ashensor/{id}/', [AshensoriController::class, 'update']);
+Route::get('ashensor/{id}/edit', [AshensoriController::class, 'edit']);
+Route::delete('ashensor/{id}/delete', [AshensoriController::class, 'destroy']);
+Route::get('/ashensorit', [AshensoriController::class, 'paginateAshensori'])->name('ashensorit')->middleware('web');
+// PRODUCTABLE CATEGORY NAME GETTER
+Route::get('/ndertesa/{id}/name', [AshensoriController::class, 'getNdertesaName']);

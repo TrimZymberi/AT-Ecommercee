@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axiosClient from "../../../api/axios";
 import { Link } from "react-router-dom";
-import ProductTable_skeleton from "./core/ProductTable_skeleton";
 import MOTable_pagination from "../../Employee/components/core/MOTable_pagination";
 import EditIcon from "./icons/EditIcon";
 import DeleteIcon from "./icons/DeleteIcon";
-import ProductTableLoadSkeleton from "./Product/ProductTable_load_skeleton";
 
-export default function ProductTable() {
+export default function AshensoriTable() {
   const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState([]);
+  const [ashensor, setAshensor] = useState([]);
+  const [user, setUsers] = useState({});
+  const [ndertesa, setNdertesa] = useState({});
   const [loadingData, setLoadingData] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const productsPerPage = 5;
+  const [ashensoriPerPage] = useState(10);
   const [reloadTable, setReloadTable] = useState(false);
 
   useEffect(() => {
@@ -26,13 +26,13 @@ export default function ProductTable() {
     setCurrentPage(page);
 
     axiosClient
-      .get(`/products?page=${page}&perPage=5`)
+      .get(`/ashensorit?page=${page}&perPage=10`)
       .then((response) => {
-        setProduct(response.data.products);
+        setAshensor(response.data.ashensori);
         setLoading(false);
 
-        const totalProducts = response.data.total;
-        const totalPages = Math.ceil(totalProducts / productsPerPage);
+        const totalAshensori = response.data.total;
+        const totalPages = Math.ceil(totalAshensori / ashensoriPerPage);
         setTotalPages(totalPages);
       })
       .catch((error) => {
@@ -46,11 +46,10 @@ export default function ProductTable() {
   // paginates
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    console.log(productsPerPage);
     axiosClient
-      .get(`/products?page=${pageNumber}&perPage=${productsPerPage}`)
+      .get(`/ashensorit?page=${pageNumber}&perPage=${ashensoriPerPage}`)
       .then((response) => {
-        setProduct(response.data.current_page);
+        setAshensor(response.data.current_page);
         setLoading(false);
       })
       .catch((error) => {
@@ -58,7 +57,7 @@ export default function ProductTable() {
       });
   };
 
-  const deleteProduct = (e, id) => {
+  const deleteAshensori = (e, id) => {
     e.preventDefault();
     const thisClicked = e.currentTarget;
 
@@ -73,7 +72,7 @@ export default function ProductTable() {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosClient
-          .delete(`product/${id}/delete`)
+          .delete(`ashensor/${id}/delete`)
           .then((res) => {
             Swal.fire({
               icon: "success",
@@ -106,55 +105,23 @@ export default function ProductTable() {
   };
 
   if (loading) {
-    return <ProductTable_skeleton />;
+    return <div>loading</div>;
   }
 
-  let ProductDetails = "";
-  ProductDetails = product.map((item, index) => {
-    const createdDate = new Date(item.created_at);
-    const imageURL = item.preview.replace("front", "");
+  let AshensoriDetails = "";
+  AshensoriDetails = ashensor.map((item, index) => {
     if (loadingData) {
-      return (
-        <ProductTableLoadSkeleton
-          createdDate={createdDate}
-          imageURL={imageURL}
-          item={item}
-          key={index}
-        />
-      );
+      return <div key={index}>Loading data</div>;
     }
-
     return (
       <tr key={index}>
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-gray-900">{item.id}</div>
         </td>
+
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 h-10 w-10">
-              <img
-                className="h-10 w-10 object-contain"
-                src={imageURL}
-                alt="food-image"
-              />
-            </div>
-          </div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm font-medium text-gray-900">{item.name}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">{item.description}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">EUR {item.retail_price}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">EUR {item.market_price}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">
-            {createdDate.toDateString()}
+          <div className="text-sm font-medium text-gray-900">
+            {item.Emertimi212257839}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
@@ -162,13 +129,13 @@ export default function ProductTable() {
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-center text-gray-500">
-            {item.category}
+            {item.ndertesa}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="flex items-center justify-center active:scale-105">
             <Link
-              to={`productedit/${item.id}`}
+              to={`ashensoriedit/${item.id}`}
               className="flex gap-2 mr-2 bg-cyan-100 text-black px-3 py-1 rounded-lg focus:outline-none focus:shadow-outline-blue"
               type="button"
             >
@@ -180,7 +147,7 @@ export default function ProductTable() {
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="flex items-center justify-center active:scale-105">
             <button
-              onClick={(e) => deleteProduct(e, item.id)}
+              onClick={(e) => deleteAshensori(e, item.id)}
               className="flex bg-red-300 gap-2 px-3 py-1 rounded-lg focus:outline-none focus:shadow-outline-red"
               type="button"
             >
@@ -203,39 +170,24 @@ export default function ProductTable() {
                 ID
               </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Preview
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Product Name
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Description
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Retail Price
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Market Price
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date Created
+                Emri
               </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created by
               </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Category
+                Ndertesa
               </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Edit Product
+                Edit Ashensori
               </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Delete Product
+                Delete Ashensori
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {ProductDetails}
+            {AshensoriDetails}
           </tbody>
         </table>
       </div>

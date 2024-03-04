@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    // paginatedCategorytable
+    public function getCategories(Request $request)
+    {
+        $perPage = $request->input('perPage', 10);
+
+        $categories = Category::paginate($perPage);
+
+        $currentPage = $request->input('page', 1);
+
+        return response()->json([
+            'categories' => $categories->items(),
+            'current_page' => $currentPage,
+            'total' => $categories->total(),
+            'per_page' => $categories->perPage(),
+            'last_page' => $categories->lastPage(),
+        ]);
+    }
+    
     /**
      * Create a new category.
      *
@@ -185,30 +203,6 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Get the name of a user based on their ID.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getUserName(int $id)
-    {
-        $user = DB::table('users')->select('name')->where('id', $id)->first();
-
-        if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'name' => $user->name
-        ]);
-    }
-
-
     public function categoryname()
     {
         $categories = Category::all('name');
@@ -218,20 +212,4 @@ class CategoryController extends Controller
         ], 200);
     }
 
-    public function getCategories(Request $request)
-    {
-        $perPage = $request->input('perPage', 10);
-
-        $categories = Category::paginate($perPage);
-
-        $currentPage = $request->input('page', 1);
-
-        return response()->json([
-            'categories' => $categories->items(),
-            'current_page' => $currentPage,
-            'total' => $categories->total(),
-            'per_page' => $categories->perPage(),
-            'last_page' => $categories->lastPage(),
-        ]);
-    }
 }

@@ -14,18 +14,30 @@ class ProductController extends Controller
 
     public function paginateProducts(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
-
-        $product = Product::paginate($perPage);
-
-        $currentPage = $request->input('page', 1);
-
+        $perPage = $request->input('perPage', 5);
+        $products = Product::paginate($perPage);
+        $currentPage = $products->currentPage();
+        $formattedProducts = $products->map(function ($product) {
+            $categoryName = DB::table('categories')->where('id', $product->category_id)->value('name');
+            $userName = DB::table('users')->where('id', $product->user_id)->value('name');
+            return [
+                'id' => $product->id,
+                'preview' => $product->preview,
+                'name' => $product->name,
+                'description' => $product->description,
+                'created_at' => $product->created_at,
+                'retail_price' => $product->getRetailPriceFormattedAttribute(),
+                'market_price' => $product->getMarketPriceFormattedAttribute(),
+                'category' => $categoryName,
+                'user' => $userName,
+            ];
+        });
         return response()->json([
-            'product' => $product->items(),
+            'products' => $formattedProducts,
             'current_page' => $currentPage,
-            'total' => $product->total(),
-            'per_page' => $product->perPage(),
-            'last_page' => $product->lastPage(),
+            'total' => $products->total(),
+            'per_page' => $products->perPage(),
+            'last_page' => $products->lastPage(),
         ]);
     }
 
@@ -225,7 +237,7 @@ class ProductController extends Controller
             $image = substr($image, strpos($image, ',') + 1);
             $type = strtolower($type[1]);
 
-            if (!in_array($type, ['jpg', 'jpeg', 'gif', 'png'])) {
+            if (!in_array($type, ['jpg', 'jpeg', 'gif', 'png', 'webp'])) {
                 throw new \Exception('Invalid image type. Only JPG, JPEG, GIF, and PNG are supported.');
             }
 

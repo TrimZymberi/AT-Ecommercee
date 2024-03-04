@@ -20,7 +20,7 @@ const ProductEdit = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  const [inputErrorList, setInputErrorList] = useState({});
+  const [inputErrorList, setInputErrorList] = useState("");
   const [product, setProduct] = useState({
     preview: "",
     preview_url: "",
@@ -51,7 +51,6 @@ const ProductEdit = () => {
     axiosClient
       .get(`product/${id}/edit`)
       .then((res) => {
-        console.log(res.data);
         setProduct(res.data.product);
         setLoading(false);
       })
@@ -71,17 +70,15 @@ const ProductEdit = () => {
     if (currentUser) {
       setProduct({ ...product, user_id: currentUser.id });
     }
-  }, [currentUser, product]);
+  }, [currentUser]);
 
   const handleInput = (event) => {
     event.persist();
     if (event.target.name === "preview") {
       onImageChoose(event);
     } else if (event.target.name === "category_id") {
-      console.log("Category ID:", event.target.value);
       setProduct({ ...product, category_id: event.target.value });
     } else {
-      console.log("Other input value:", event.target.value);
       setProduct({ ...product, [event.target.name]: event.target.value });
     }
   };
@@ -89,8 +86,29 @@ const ProductEdit = () => {
   const updateProduct = (event) => {
     event.preventDefault();
     setSubmitting(true);
+    // const fieldsToCheck = [
+    //   "category_id",
+    //   "preview",
+    //   "preview_url",
+    //   "name",
+    //   "description",
+    //   "retail_price",
+    //   "market_price",
+    // ];
 
     const payload = { ...product };
+
+    // for (const field of fieldsToCheck) {
+    //   if (payload[field] === "") {
+    //     setInputErrorList((prev) => ({
+    //       ...prev,
+    //       [field]: `Fill ${field}, field is empty`,
+    //     }));
+    //     setSubmitting(false);
+    //     return;
+    //   }
+    // }
+
     if (payload.preview) {
       payload.preview = payload.preview_url;
     }
@@ -112,10 +130,10 @@ const ProductEdit = () => {
             setInputErrorList(error.response.data.errors);
           }
           if (error.response.status === 404) {
-            alert(error.response.data.message);
+            setInputErrorList({ simple: error.response.data.message });
           }
           if (error.response.status === 500) {
-            alert(error.response.data);
+            setInputErrorList({ other: error.response.data });
           }
         }
       })
@@ -222,8 +240,12 @@ const ProductEdit = () => {
                   name="category_id"
                   id="category"
                 >
-                  <ErrorMessage>{inputErrorList.category_id}</ErrorMessage>
+                  <ErrorMessage>
+                    {inputErrorList.category_id}
+                    {inputErrorList.simple}
+                  </ErrorMessage>
                 </Select>
+
                 <Input
                   htmlFor="retail_price"
                   labelName="Retail Price"
@@ -244,8 +266,12 @@ const ProductEdit = () => {
                   name="market_price"
                   id="market_price"
                 >
-                  <ErrorMessage>{inputErrorList.market_price}</ErrorMessage>
+                  <ErrorMessage>
+                    {inputErrorList.market_price}
+                    {inputErrorList.other}
+                  </ErrorMessage>
                 </Input>
+
                 <Button type="submit">Update</Button>
               </form>
             </div>

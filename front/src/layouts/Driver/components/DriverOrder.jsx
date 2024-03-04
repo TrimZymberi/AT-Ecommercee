@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import axiosClient from "../../../api/axios";
 import Swal from "sweetalert2";
@@ -8,7 +8,6 @@ import Pagination from "./core/MOTable_pagination";
 
 export default function DriverOrder() {
   const { currentUser } = useStateContext();
-
   const [modalVisible, setModalVisible] = useState(false);
   const [loadingModal, setLoadingModal] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -21,7 +20,7 @@ export default function DriverOrder() {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [selectedOrderItems, setSelectedOrderItems] = useState([]);
 
-  const [selectedStatus, setSelectedStatus] = useState("delivered");
+  const selectedStatus = "delivered";
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -43,7 +42,7 @@ export default function DriverOrder() {
         console.error("Failed to fetch orders", error);
       });
     setReloadTable(false);
-  }, [currentUser.id, reloadTable]);
+  }, [currentUser.id, reloadTable, ordersPerPage]);
 
   // ^ FUNCTIONS
 
@@ -222,7 +221,7 @@ export default function DriverOrder() {
                     <td className="px-6 py-4 text-center">
                       <button
                         value={"delivered"}
-                        onClick={() => handleStatusChange(order.id)}
+                        // onClick={() => handleStatusChange(order.id)}
                         type="submit"
                         className="font-medium bg-green-100 p-3 rounded-md hover:bg-green-300 text-green-700"
                       >

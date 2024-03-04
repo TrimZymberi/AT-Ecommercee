@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import axiosClient from "../../../api/axios";
 import { Link } from "react-router-dom";
-import ProductTable_skeleton from "./core/ProductTable_skeleton";
+import Swal from "sweetalert2";
 import MOTable_pagination from "../../Employee/components/core/MOTable_pagination";
-import EditIcon from "./icons/EditIcon";
 import DeleteIcon from "./icons/DeleteIcon";
-import ProductTableLoadSkeleton from "./Product/ProductTable_load_skeleton";
+import EditIcon from "./icons/EditIcon";
 
-export default function ProductTable() {
+export default function NdertesaTable() {
   const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState([]);
-  const [loadingData, setLoadingData] = useState(false);
-
+  const [loadingName, setLoadingName] = useState(false);
+  const [ndertesa, setNdertesa] = useState([]);
+  const [users, setUsers] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const productsPerPage = 5;
+  const [ndertesaPerPage] = useState(10);
   const [reloadTable, setReloadTable] = useState(false);
 
   useEffect(() => {
@@ -26,31 +24,45 @@ export default function ProductTable() {
     setCurrentPage(page);
 
     axiosClient
-      .get(`/products?page=${page}&perPage=5`)
+      .get(`/ndertesat?page=${page}&perPage=10`)
       .then((response) => {
-        setProduct(response.data.products);
+        setNdertesa(response.data.ndertesat);
         setLoading(false);
 
-        const totalProducts = response.data.total;
-        const totalPages = Math.ceil(totalProducts / productsPerPage);
+        const totalNdertesat = response.data.total;
+        const totalPages = Math.ceil(totalNdertesat / ndertesaPerPage);
         setTotalPages(totalPages);
+
+        setLoadingName(true);
+        response.data.ndertesat.forEach((item) => {
+          axiosClient
+            .get(`users/${item.user_id}/name`)
+            .then((res) => {
+              const name = res.data.name;
+              setUsers((prevState) => ({
+                ...prevState,
+                [item.user_id]: name,
+              }));
+              setLoadingName(false);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       })
       .catch((error) => {
-        console.error(error);
-        setLoading(false);
-        setLoadingData(false);
+        console.error("Failed to fetch ndertesat", error);
       });
-    setReloadTable(false);
-  }, [reloadTable]);
 
-  // paginates
+    setReloadTable(false);
+  }, [reloadTable, ndertesaPerPage]);
+
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    console.log(productsPerPage);
     axiosClient
-      .get(`/products?page=${pageNumber}&perPage=${productsPerPage}`)
+      .get(`/ndertesat?page=${pageNumber}&perPage=${ndertesaPerPage}`)
       .then((response) => {
-        setProduct(response.data.current_page);
+        setNdertesa(response.data.current_page);
         setLoading(false);
       })
       .catch((error) => {
@@ -58,7 +70,7 @@ export default function ProductTable() {
       });
   };
 
-  const deleteProduct = (e, id) => {
+  const deleteNdertesa = (e, id) => {
     e.preventDefault();
     const thisClicked = e.currentTarget;
 
@@ -73,7 +85,7 @@ export default function ProductTable() {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosClient
-          .delete(`product/${id}/delete`)
+          .delete(`ndertesa/${id}/delete`)
           .then((res) => {
             Swal.fire({
               icon: "success",
@@ -106,22 +118,16 @@ export default function ProductTable() {
   };
 
   if (loading) {
-    return <ProductTable_skeleton />;
+    return <div>Loading</div>;
   }
 
-  let ProductDetails = "";
-  ProductDetails = product.map((item, index) => {
+  let ndertesaDetails = "";
+  ndertesaDetails = ndertesa.map((item, index) => {
     const createdDate = new Date(item.created_at);
-    const imageURL = item.preview.replace("front", "");
-    if (loadingData) {
-      return (
-        <ProductTableLoadSkeleton
-          createdDate={createdDate}
-          imageURL={imageURL}
-          item={item}
-          key={index}
-        />
-      );
+    const dataPT = new Date(item.DataPT);
+
+    if (loadingName) {
+      return <div key={index}>Loading</div>;
     }
 
     return (
@@ -130,62 +136,46 @@ export default function ProductTable() {
           <div className="text-sm text-gray-900">{item.id}</div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 h-10 w-10">
-              <img
-                className="h-10 w-10 object-contain"
-                src={imageURL}
-                alt="food-image"
-              />
-            </div>
+          <div className="text-sm font-medium text-gray-900">
+            {item.Emri212257839}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm font-medium text-gray-900">{item.name}</div>
+          <div className="text-sm text-gray-500 text-start">
+            {dataPT.toDateString()}
+          </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">{item.description}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">EUR {item.retail_price}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">EUR {item.market_price}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 text-center">
             {createdDate.toDateString()}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-center text-gray-500">{item.user}</div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm text-center text-gray-500">
-            {item.category}
+          <div className="text-sm text-gray-500 underline text-center">
+            {users[item.user_id]}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="flex items-center justify-center active:scale-105">
+          <div className="flex items-center text-cyan-900 justify-center active:scale-105">
             <Link
-              to={`productedit/${item.id}`}
-              className="flex gap-2 mr-2 bg-cyan-100 text-black px-3 py-1 rounded-lg focus:outline-none focus:shadow-outline-blue"
+              to={`ndertesaedit/${item.id}`}
+              className="flex gap-2 mr-2 bg-cyan-100 px-3 py-1 rounded-lg focus:outline-none focus:shadow-outline-blue"
               type="button"
             >
               <EditIcon />
-              <p className="text-black">Edit</p>
+              <p>Edit</p>
             </Link>
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="flex items-center justify-center active:scale-105">
+          <div className="flex items-center text-red-900 justify-center active:scale-105">
             <button
-              onClick={(e) => deleteProduct(e, item.id)}
+              onClick={(e) => deleteNdertesa(e, item.id)}
               className="flex bg-red-300 gap-2 px-3 py-1 rounded-lg focus:outline-none focus:shadow-outline-red"
               type="button"
             >
               <DeleteIcon />
-              <p className="text-black">Delete</p>
+              <p>Delete</p>
             </button>
           </div>
         </td>
@@ -199,43 +189,31 @@ export default function ProductTable() {
         <table className="w-full border border-gray-300 divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-xs text-start font-medium text-gray-500 uppercase tracking-wider">
                 ID
               </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Preview
+              <th className="px-6 py-3 text-xs text-start font-medium text-gray-500 uppercase tracking-wider">
+                Emertimi
               </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Product Name
+              <th className="px-6 py-3 text-xs text-start font-medium text-gray-500 uppercase tracking-wider">
+                DataPT
               </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Description
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Retail Price
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Market Price
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
                 Date Created
               </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
                 Created by
               </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Category
+                Edit Ndertesa
               </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Edit Product
-              </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Delete Product
+                Delete Ndertesa
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {ProductDetails}
+            {ndertesaDetails}
           </tbody>
         </table>
       </div>

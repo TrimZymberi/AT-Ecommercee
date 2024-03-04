@@ -37,6 +37,12 @@ import {
   AboutUs,
   LazyLoading,
 } from "./imports/global/global";
+import NdertesaList from "../layouts/Manager/views/NdertesaList";
+import NdertesaRegister from "../layouts/Manager/components/NdertesaRegister";
+import NdertesaEdit from "../layouts/Manager/components/NdertesaEdit";
+import AshensoriList from "../layouts/Manager/views/AshensoriList";
+import AshensoriRegister from "../layouts/Manager/components/AshensoriRegister";
+import AshensorEdit from "../layouts/Manager/components/AshensoriEdit";
 
 const router = createBrowserRouter([
   {
@@ -304,6 +310,55 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LazyLoading />}>
             <UserCreate />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "ndertesalist",
+        element: (
+          <Suspense fallback={<LazyLoading />}>
+            <NdertesaList />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ndertesaregister",
+        element: (
+          <Suspense fallback={<LazyLoading />}>
+            <NdertesaRegister />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ndertesalist/ndertesaedit/:id",
+        element: (
+          <Suspense fallback={<LazyLoading />}>
+            <NdertesaEdit />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ashensorilist",
+        element: (
+          <Suspense fallback={<LazyLoading />}>
+            <AshensoriList />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ashensoriregister",
+        element: (
+          <Suspense fallback={<LazyLoading />}>
+            <AshensoriRegister />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ashensorilist/ashensoriedit/:id",
+        element: (
+          <Suspense fallback={<LazyLoading />}>
+            <AshensorEdit />
           </Suspense>
         ),
       },

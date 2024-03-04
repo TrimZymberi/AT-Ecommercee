@@ -14,4 +14,14 @@ class Ndertesa212257839 extends Model
         'DataPT',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
