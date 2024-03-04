@@ -121,28 +121,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Retrieve a specific category for display.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function display($id)
-    {
-        $category = Category::find($id);
-
-        if (!$category) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No category found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'category' => $category
-        ]);
-    }
 
     /**
      * Delete a specific category.

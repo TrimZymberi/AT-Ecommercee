@@ -125,29 +125,6 @@ class NdertesaController extends Controller
     }
 
     /**
-     * Retrieve a specific ndertesa for display.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function display($id)
-    {
-        $ndertesa = Ndertesa212257839::find($id);
-
-        if (!$ndertesa) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No ndertesa found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'ndertesa' => $ndertesa
-        ]);
-    }
-
-    /**
      * Delete a specific ndertesa.
      *
      * @param  int  $id

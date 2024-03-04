@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
-    public function paginateProducts(Request $request)
+    public function paginate(Request $request)
     {
         $perPage = $request->input('perPage', 5);
         $products = Product::paginate($perPage);

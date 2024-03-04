@@ -39,11 +39,8 @@ Route::post('product', [ProductController::class, 'create']);
 Route::put('product/{id}/', [ProductController::class, 'update']);
 Route::get('product/{id}/edit', [ProductController::class, 'edit']);
 Route::delete('product/{id}/delete', [ProductController::class, 'destroy']);
-Route::get('product/search', [ProductController::class, 'search']);
-Route::get('/products', [ProductController::class, 'paginateProducts'])->name('products')->middleware('web');
+Route::get('/products', [ProductController::class, 'paginate'])->name('products')->middleware('web');
 Route::get('/products/count', [ProductController::class, 'count']);
-// PRODUCTABLE CATEGORY NAME GETTER
-Route::get('/category/{id}/name', [ProductController::class, 'getCatName']);
 
 Route::get('category', [CategoryController::class, 'index']);
 Route::post('category', [CategoryController::class, 'create']);
@@ -51,14 +48,12 @@ Route::put('category/{id}/', [CategoryController::class, 'update']);
 Route::get('category/{id}/edit', [CategoryController::class, 'edit']);
 Route::get('category/{id}', [CategoryController::class, 'show']);
 Route::delete('category/{id}/delete', [CategoryController::class, 'destroy']);
-Route::get('/search', [CategoryController::class, 'search']);
 // used to show categories for input
 Route::get('namecat', [CategoryController::class, 'categoryname']);
 // paginator
 Route::get('/categories', [CategoryController::class, 'paginate'])->name('categories')->middleware('web');
 
 Route::get('driverls', [UserController::class, 'drivername']);
-
 Route::get('/orders', [OrderController::class, 'getOrdersEmployee'])->name('orders')->middleware('web');
 Route::get('/allorders', [OrderController::class, 'allOrders'])->name('orders')->middleware('web');
 Route::get('/driverorders', [OrderController::class, 'driverOrders'])->name('driverorders')->middleware('web');
@@ -82,7 +77,6 @@ Route::get('/users/count', [UserController::class, 'count']);
 Route::get('/users/{id}/name', [UserController::class, 'getUserName']);
 // Route::post('/subscribe', [SubscriberController::class, 'subscribe']);
 
-Route::get('ndertesa', [NdertesaController::class, 'index']);
 Route::post('ndertesa', [NdertesaController::class, 'create']);
 Route::put('ndertesa/{id}/', [NdertesaController::class, 'update']);
 Route::get('ndertesa/{id}/edit', [NdertesaController::class, 'edit']);
@@ -94,7 +88,6 @@ Route::get('/ndertesat', [NdertesaController::class, 'paginate'])->name('ndertes
 Route::get('namendertesa', [NdertesaController::class, 'ndertesaname']);
 
 
-Route::get('ashensor', [AshensoriController::class, 'index']);
 Route::post('ashensor', [AshensoriController::class, 'create']);
 Route::put('ashensor/{id}/', [AshensoriController::class, 'update']);
 Route::get('ashensor/{id}/edit', [AshensoriController::class, 'edit']);
