@@ -6,6 +6,7 @@ use App\Http\Requests\NdertesaRequest;
 use App\Models\Ndertesa212257839;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NdertesaController extends Controller
 {
@@ -36,21 +37,29 @@ class NdertesaController extends Controller
 
     public function paginate(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
-
+        $perPage = $request->input('perPage', 5);
         $ndertesa = Ndertesa212257839::paginate($perPage);
-
-        $currentPage = $request->input('page', 1);
-
+        $currentPage = $ndertesa->currentPage();
+        $formattedCategories = $ndertesa->map(function ($ndertes) {
+            $userName = DB::table('users')->where('id', $ndertes->user_id)->value('name');
+            return [
+                'id' => $ndertes->id,
+                'Emri212257839' => $ndertes->Emri212257839,
+                'DataPT' => $ndertes->DataPT,
+                'created_at' => $ndertes->created_at,
+                'user' => $userName,
+            ];
+        });
         return response()->json([
-            'ndertesat' => $ndertesa->items(),
+            'ndertesat' => $formattedCategories,
             'current_page' => $currentPage,
             'total' => $ndertesa->total(),
             'per_page' => $ndertesa->perPage(),
             'last_page' => $ndertesa->lastPage(),
         ]);
     }
-    
+
+
     /**
      * Update an existing ndertesa.
      *

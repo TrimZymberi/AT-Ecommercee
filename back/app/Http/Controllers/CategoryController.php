@@ -10,17 +10,23 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    // paginatedCategorytable
-    public function getCategories(Request $request)
+
+    public function paginate(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
-
+        $perPage = $request->input('perPage', 5);
         $categories = Category::paginate($perPage);
-
-        $currentPage = $request->input('page', 1);
-
+        $currentPage = $categories->currentPage();
+        $formattedCategories = $categories->map(function ($category) {
+            $userName = DB::table('users')->where('id', $category->user_id)->value('name');
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'created_at' => $category->created_at,
+                'user' => $userName,
+            ];
+        });
         return response()->json([
-            'categories' => $categories->items(),
+            'categories' => $formattedCategories,
             'current_page' => $currentPage,
             'total' => $categories->total(),
             'per_page' => $categories->perPage(),

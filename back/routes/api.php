@@ -55,7 +55,7 @@ Route::get('/search', [CategoryController::class, 'search']);
 // used to show categories for input
 Route::get('namecat', [CategoryController::class, 'categoryname']);
 // paginator
-Route::get('/categories', [CategoryController::class, 'getCategories'])->name('categories')->middleware('web');
+Route::get('/categories', [CategoryController::class, 'paginate'])->name('categories')->middleware('web');
 
 Route::get('driverls', [UserController::class, 'drivername']);
 
@@ -88,11 +88,9 @@ Route::put('ndertesa/{id}/', [NdertesaController::class, 'update']);
 Route::get('ndertesa/{id}/edit', [NdertesaController::class, 'edit']);
 Route::get('ndertesa/{id}', [NdertesaController::class, 'show']);
 Route::delete('ndertesa/{id}/delete', [NdertesaController::class, 'destroy']);
-Route::get('/search', [NdertesaController::class, 'search']);
 Route::get('/ndertesat', [NdertesaController::class, 'paginate'])->name('ndertesat')->middleware('web');
 
 // used to show categories for input
-
 Route::get('namendertesa', [NdertesaController::class, 'ndertesaname']);
 
 
@@ -102,5 +100,3 @@ Route::put('ashensor/{id}/', [AshensoriController::class, 'update']);
 Route::get('ashensor/{id}/edit', [AshensoriController::class, 'edit']);
 Route::delete('ashensor/{id}/delete', [AshensoriController::class, 'destroy']);
 Route::get('/ashensorit', [AshensoriController::class, 'paginateAshensori'])->name('ashensorit')->middleware('web');
-// PRODUCTABLE CATEGORY NAME GETTER
-Route::get('/ndertesa/{id}/name', [AshensoriController::class, 'getNdertesaName']);

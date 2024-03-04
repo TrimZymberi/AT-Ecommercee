@@ -8,9 +8,7 @@ import EditIcon from "./icons/EditIcon";
 
 export default function NdertesaTable() {
   const [loading, setLoading] = useState(true);
-  const [loadingName, setLoadingName] = useState(false);
   const [ndertesa, setNdertesa] = useState([]);
-  const [users, setUsers] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [ndertesaPerPage] = useState(10);
@@ -32,23 +30,6 @@ export default function NdertesaTable() {
         const totalNdertesat = response.data.total;
         const totalPages = Math.ceil(totalNdertesat / ndertesaPerPage);
         setTotalPages(totalPages);
-
-        setLoadingName(true);
-        response.data.ndertesat.forEach((item) => {
-          axiosClient
-            .get(`users/${item.user_id}/name`)
-            .then((res) => {
-              const name = res.data.name;
-              setUsers((prevState) => ({
-                ...prevState,
-                [item.user_id]: name,
-              }));
-              setLoadingName(false);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       })
       .catch((error) => {
         console.error("Failed to fetch ndertesat", error);
@@ -126,10 +107,6 @@ export default function NdertesaTable() {
     const createdDate = new Date(item.created_at);
     const dataPT = new Date(item.DataPT);
 
-    if (loadingName) {
-      return <div key={index}>Loading</div>;
-    }
-
     return (
       <tr key={index}>
         <td className="px-6 py-4 whitespace-nowrap">
@@ -152,7 +129,7 @@ export default function NdertesaTable() {
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-gray-500 underline text-center">
-            {users[item.user_id]}
+            {item.user}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">

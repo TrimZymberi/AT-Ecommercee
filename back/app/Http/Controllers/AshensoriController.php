@@ -11,22 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class AshensoriController extends Controller
 {
-    // public function paginateProducts(Request $request)
-    // {
-    //     $perPage = $request->input('perPage', 10);
-
-    //     $ashensori = Ashensori212257839::paginate($perPage);
-
-    //     $currentPage = $request->input('page', 1);
-
-    //     return response()->json([
-    //         'ashensori' => $ashensori->items(),
-    //         'current_page' => $currentPage,
-    //         'total' => $ashensori->total(),
-    //         'per_page' => $ashensori->perPage(),
-    //         'last_page' => $ashensori->lastPage(),
-    //     ]);
-    // }
 
     public function paginateAshensori(Request $request)
     {
@@ -180,42 +164,4 @@ class AshensoriController extends Controller
         ], 200);
     }
 
-    public function index()
-    {
-        $ashensori = Ashensori212257839::all();
-        if ($ashensori->count() > 0) {
-            return response()->json([
-                'status' => 200,
-                'ashensori' => $ashensori
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'no records found'
-            ], 404);
-        }
-    }
-
-    /**
-     * Get the name of a user based on their ID.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getNdertesaName(int $id)
-    {
-        $ndertesa = DB::table('ndertesa212257839s')->select('Emri212257839')->where('id', $id)->first();
-
-        if (!$ndertesa) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Ndertesa not found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'name' => $ndertesa->Emri212257839
-        ]);
-    }
 }

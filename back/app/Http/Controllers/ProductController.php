@@ -208,29 +208,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Get the name of a user based on their ID.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getCatName(int $id)
-    {
-        $user = DB::table('categories')->select('name')->where('id', $id)->first();
-
-        if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'name' => $user->name
-        ]);
-    }
-
     private function saveImage($image)
     {
         if (preg_match('/^data:image\/(\w+);base64,/', $image, $type)) {

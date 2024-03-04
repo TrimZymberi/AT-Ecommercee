@@ -10,7 +10,6 @@ import CategoryTableLoadingSkeleton from "./Category/CategoryTable_loading_skele
 
 export default function CategoryTable() {
   const [loading, setLoading] = useState(true);
-  const [loadingName, setLoadingName] = useState(false);
   const [category, setCategory] = useState([]);
   const [users, setUsers] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,23 +33,6 @@ export default function CategoryTable() {
         const totalCategories = response.data.total;
         const totalPages = Math.ceil(totalCategories / categorysPerPage);
         setTotalPages(totalPages);
-
-        setLoadingName(true);
-        response.data.categories.forEach((item) => {
-          axiosClient
-            .get(`users/${item.user_id}/name`)
-            .then((res) => {
-              const name = res.data.name;
-              setUsers((prevState) => ({
-                ...prevState,
-                [item.user_id]: name,
-              }));
-              setLoadingName(false);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       })
       .catch((error) => {
         console.error("Failed to fetch categories", error);
@@ -127,17 +109,6 @@ export default function CategoryTable() {
   categoryDetails = category.map((item, index) => {
     const createdDate = new Date(item.created_at);
 
-    if (loadingName) {
-      return (
-        <CategoryTableLoadingSkeleton
-          key={index}
-          item={item}
-          index={index}
-          createdDate={createdDate}
-        />
-      );
-    }
-
     return (
       <tr key={index}>
         <td className="px-6 py-4 whitespace-nowrap">
@@ -153,7 +124,7 @@ export default function CategoryTable() {
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-gray-500 underline text-center">
-            {users[item.user_id]}
+            {item.user}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
